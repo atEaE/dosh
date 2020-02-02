@@ -1,0 +1,142 @@
+﻿#####################################################################################
+#   ※ https://editorconfig.org/
+#   ※ https://aka.ms/editorconfigdocs
+#####################################################################################
+
+root = true
+
+####################################
+# All files
+####################################
+[*]
+indent_style = space
+
+####################################
+# Config files
+####################################
+[*.config]
+indent_size = 2
+insert_final_newline = false
+
+####################################
+# Code files
+####################################
+[*.{cs,csx,vb,vbx}]
+indent_size = 4
+insert_final_newline = true
+charset = utf-8-bom
+end_of_line = crlf
+
+####################################
+# .NET Only Settings
+####################################
+# 自己参照ケース(this.〇〇)に対して、省力記法を強制します。
+dotnet_style_qualification_for_field = false:error
+dotnet_style_qualification_for_property = false:error
+dotnet_style_qualification_for_method = false:error
+dotnet_style_qualification_for_event = false:error
+
+
+####################################
+# C# Cording Suggestion 
+####################################
+# IDE0028: コレクションの初期化を簡略化
+dotnet_style_collection_initializer = false
+# IDE0017: オブジェクトの初期化を簡略化
+dotnet_style_object_initializer = false
+# メソッド未使用パラメータの除外
+dotnet_code_quality_unused_parameters = all:error
+
+
+####################################
+# C# Cording Styling
+####################################
+### インデント設定
+csharp_indent_block_contents = true
+csharp_indent_braces = false
+csharp_indent_case_contents = true
+csharp_indent_case_contents_when_block = true
+csharp_indent_labels = one_less_than_current
+csharp_indent_switch_labels = true
+
+### 折り返しの設定
+# 単一行のブロック配置を許可する。
+csharp_preserve_single_line_blocks = true
+
+# Interfaceの名前つけ規則(IをPrefixとして付けない場合はErrorとして通知)
+dotnet_naming_rule.interface_should_be_begins_with_i.severity = error
+dotnet_naming_rule.interface_should_be_begins_with_i.symbols = interface
+dotnet_naming_rule.interface_should_be_begins_with_i.style = begins_with_i
+# Public, Protected(Private以外)のメソッドに対して、パスカルケースの使用を強制する。
+dotnet_naming_rule.method_should_be_pascal_case.severity = error
+dotnet_naming_rule.method_should_be_pascal_case.symbols = method
+dotnet_naming_rule.method_should_be_pascal_case.style = pascal_case
+# Privateメソッドに対して、キャメルケースの使用を強制する。
+dotnet_naming_rule.private_method_should_be_camel_case.severity = error
+dotnet_naming_rule.private_method_should_be_camel_case.symbols = private_method
+dotnet_naming_rule.private_method_should_be_camel_case.style = camel_case
+# Class名にパスカルケースを強制する。
+dotnet_naming_rule.class_should_be_pascal_case.severity = error
+dotnet_naming_rule.class_should_be_pascal_case.symbols = class
+dotnet_naming_rule.class_should_be_pascal_case.style = pascal_case
+# 構造体にパスカルケースを強制する。
+dotnet_naming_rule.struct_should_be_pascal_case.severity = error
+dotnet_naming_rule.struct_should_be_pascal_case.symbols = struct
+dotnet_naming_rule.struct_should_be_pascal_case.style = pascal_case
+# 定数(const)に対してALL UpperCaseを強制する。
+dotnet_naming_rule.const_should_be_all_upper_case.severity = error
+dotnet_naming_rule.const_should_be_all_upper_case.symbols = const_field
+dotnet_naming_rule.const_should_be_all_upper_case.style = all_upper
+
+####################################
+# C# Cording Style Modifier Def
+####################################
+
+dotnet_naming_symbols.class.applicable_kinds = class
+dotnet_naming_symbols.class.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected
+dotnet_naming_symbols.class.required_modifiers = 
+
+dotnet_naming_symbols.interface.applicable_kinds = interface
+dotnet_naming_symbols.interface.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected
+dotnet_naming_symbols.interface.required_modifiers = 
+
+dotnet_naming_symbols.struct.applicable_kinds = struct
+dotnet_naming_symbols.struct.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected
+dotnet_naming_symbols.struct.required_modifiers = 
+
+dotnet_naming_symbols.method.applicable_kinds = method
+dotnet_naming_symbols.method.applicable_accessibilities = public
+dotnet_naming_symbols.method.required_modifiers = 
+
+dotnet_naming_symbols.private_method.applicable_kinds = method
+dotnet_naming_symbols.private_method.applicable_accessibilities = private
+dotnet_naming_symbols.private_method.required_modifiers = 
+
+dotnet_naming_symbols.const_field.applicable_kinds = field
+dotnet_naming_symbols.const_field.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected
+dotnet_naming_symbols.const_field.required_modifiers = const
+
+
+####################################
+# C# Cording Style Rules Def
+####################################
+
+dotnet_naming_style.pascal_case.required_prefix = 
+dotnet_naming_style.pascal_case.required_suffix = 
+dotnet_naming_style.pascal_case.word_separator = 
+dotnet_naming_style.pascal_case.capitalization = pascal_case
+
+dotnet_naming_style.begins_with_i.required_prefix = I
+dotnet_naming_style.begins_with_i.required_suffix = 
+dotnet_naming_style.begins_with_i.word_separator = 
+dotnet_naming_style.begins_with_i.capitalization = pascal_case
+
+dotnet_naming_style.camel_case.required_prefix = 
+dotnet_naming_style.camel_case.required_suffix = 
+dotnet_naming_style.camel_case.word_separator = 
+dotnet_naming_style.camel_case.capitalization = camel_case
+
+dotnet_naming_style.all_upper.required_prefix = 
+dotnet_naming_style.all_upper.required_suffix = 
+dotnet_naming_style.all_upper.word_separator = 
+dotnet_naming_style.all_upper.capitalization = all_upper
