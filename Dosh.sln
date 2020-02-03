@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30503.244
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{E892A8D6-1791-4F3C-9A71-8FD51409A253}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{7CFA9E26-9823-4E9F-B5C1-B56CFE0A8B51}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution", "Solution", "{2B059945-F54C-49D6-A594-AE0376077749}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitignore = .gitignore
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dosh", "Dosh\Dosh\Dosh.csproj", "{ED6A0B60-80E4-407C-AF6D-A9988012440D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dosh.Core.Logger", "Dosh.Core.Logger\Dosh.Core.Logger.csproj", "{318B0CAC-1854-486F-8688-70D0494331CB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dosh.Core.Message", "Dosh.Core.Message\Dosh.Core.Message.csproj", "{130FE7A1-1AF7-4781-AF23-829B714952D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dosh.Core.Runtime", "Dosh.Core.Runtime\Dosh.Core.Runtime.csproj", "{CCB2D966-0E95-43ED-821E-70C8ED2F07BB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ED6A0B60-80E4-407C-AF6D-A9988012440D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED6A0B60-80E4-407C-AF6D-A9988012440D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED6A0B60-80E4-407C-AF6D-A9988012440D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED6A0B60-80E4-407C-AF6D-A9988012440D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{318B0CAC-1854-486F-8688-70D0494331CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{318B0CAC-1854-486F-8688-70D0494331CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{318B0CAC-1854-486F-8688-70D0494331CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{318B0CAC-1854-486F-8688-70D0494331CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{130FE7A1-1AF7-4781-AF23-829B714952D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{130FE7A1-1AF7-4781-AF23-829B714952D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{130FE7A1-1AF7-4781-AF23-829B714952D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{130FE7A1-1AF7-4781-AF23-829B714952D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCB2D966-0E95-43ED-821E-70C8ED2F07BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCB2D966-0E95-43ED-821E-70C8ED2F07BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCB2D966-0E95-43ED-821E-70C8ED2F07BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCB2D966-0E95-43ED-821E-70C8ED2F07BB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{ED6A0B60-80E4-407C-AF6D-A9988012440D} = {E892A8D6-1791-4F3C-9A71-8FD51409A253}
+		{318B0CAC-1854-486F-8688-70D0494331CB} = {E892A8D6-1791-4F3C-9A71-8FD51409A253}
+		{130FE7A1-1AF7-4781-AF23-829B714952D8} = {E892A8D6-1791-4F3C-9A71-8FD51409A253}
+		{CCB2D966-0E95-43ED-821E-70C8ED2F07BB} = {E892A8D6-1791-4F3C-9A71-8FD51409A253}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A4C91FD5-2BE5-4A30-8EA9-24FBBAC541AB}
+	EndGlobalSection
+EndGlobal
