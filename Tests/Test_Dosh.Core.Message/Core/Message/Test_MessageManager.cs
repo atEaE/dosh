@@ -1,13 +1,18 @@
 ﻿using Dosh.Core.Message;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Globalization;
 
 namespace Test_Dosh.Core.Message
 {
+    /// <summary>
+    /// MessageManager Unit Test
+    /// </summary>
     [TestClass]
     public class Test_MessageManager
     {
+        /// <summary>
+        /// language switching test
+        /// </summary>
         [TestMethod]
         public void MultipleLanguageCheck()
         {
@@ -18,7 +23,7 @@ namespace Test_Dosh.Core.Message
 
             // english check
             var exp_eng = "Launch the program.";
-            Assert.AreEqual(exp_eng, MessageManager.GetMessage());
+            Assert.AreEqual(exp_eng, MessageManager.GetMessage(MessageID.RUNTIME_00001));
 
 
             // setup
@@ -28,7 +33,7 @@ namespace Test_Dosh.Core.Message
 
             // japanese check
             var exp_jpn = "プログラムを起動します。";
-            Assert.AreEqual(exp_jpn, MessageManager.GetMessage());
+            Assert.AreEqual(exp_jpn, MessageManager.GetMessage(MessageID.RUNTIME_00001));
         }
     }
 }

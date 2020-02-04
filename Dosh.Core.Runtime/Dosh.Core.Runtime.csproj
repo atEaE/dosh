@@ -41,10 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Crawler\Base\ICrawler.cs" />
+    <Compile Include="Core\Evaluator\Base\IEvaluator.cs" />
+    <Compile Include="Core\Injector\Base\IInjector.cs" />
+    <Compile Include="Core\Initializer\Base\IInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Core\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

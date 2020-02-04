@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Linq;
-using System.Text;
+﻿using Dosh.Properties;
 using System.Globalization;
-using System.Threading.Tasks;
-using System.Resources;
-using Dosh.Properties;
+using System.Linq;
 
 namespace Dosh.Core.Message
 {
@@ -15,10 +9,28 @@ namespace Dosh.Core.Message
     /// </summary>
     public static class MessageManager
     {
-
-        public static string GetMessage()
+        /// <summary>
+        /// Get the target message from Resource.resx.
+        /// </summary>
+        /// <param name="id">message id.</param>
+        /// <param name="args">formart argments.</param>
+        /// <returns>message</returns>
+        public static string GetMessage(MessageID id, params string[] args)
         {
-            return Resources.RUNTIME_00001;
+            var message = Resources.ResourceManager.GetString(id.ToString(), CultureInfo.CurrentCulture);
+            if (string.IsNullOrEmpty(message))
+            {
+                return string.Empty;
+            }
+
+            if (args != null && args.Any())
+            {
+                return string.Format(message, args);
+            } 
+            else
+            {
+                return message;
+            }
         }
     }
 }
