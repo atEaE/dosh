@@ -1,6 +1,5 @@
 ﻿using Dosh.CLI.Localize;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Globalization;
 
 namespace Test_Dosh.CLI.Sentence

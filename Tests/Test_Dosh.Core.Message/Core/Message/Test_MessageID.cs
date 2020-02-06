@@ -37,9 +37,9 @@ namespace Test_Dosh.Core.Message
         public void CheckMessageInJapanese()
         {
             // setup
-            var eng = new CultureInfo("ja-JP");
-            CultureInfo.CurrentCulture = eng;
-            CultureInfo.CurrentUICulture = eng;
+            var jpn = new CultureInfo("ja-JP");
+            CultureInfo.CurrentCulture = jpn;
+            CultureInfo.CurrentUICulture = jpn;
 
             // expected
             var exp_runtime_00001 = "プログラムを起動します。";
