@@ -1,15 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CommandLine;
+using Dosh.CLI.Commands;
 
-namespace Dosh
+namespace Dosh.CLI
 {
-    class Program
+    /// <summary>
+    /// Entry class
+    /// </summary>
+    public class Program
     {
-        static void Main(string[] args)
+        /// <summary>
+        /// Entry point
+        /// </summary>
+        /// <param name="args">command line arguments</param>
+        public static void Main(string[] args)
         {
+            var result = Parser.Default.ParseArguments<Init, Run>(args);
+            result.WithParsed<Init>(cmd => cmd.Execute())
+                  .WithParsed<Run>(cmd => cmd.Execute());
         }
     }
 }
