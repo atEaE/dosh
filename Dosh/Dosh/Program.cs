@@ -1,5 +1,6 @@
 ﻿using CommandLine;
 using Dosh.CLI.Commands;
+using System.Configuration;
 using System.IO;
 using static Dosh.CLI.Const.CLIConst;
 
@@ -18,9 +19,11 @@ namespace Dosh.CLI
         {
             if (!Directory.Exists(DOSH_APPFOLDER))
             {
-                CreateApplicationFolder();
+                createApplicationFolder();
             }
-                
+
+            initializeAppConfig();
+
             var result = Parser.Default.ParseArguments<Init, Run>(args);
             result.WithParsed<Init>(cmd => cmd.Execute())
                   .WithParsed<Run>(cmd => cmd.Execute());
@@ -29,13 +32,23 @@ namespace Dosh.CLI
         /// <summary>
         /// Create application folder.
         /// </summary>
-        public static void CreateApplicationFolder()
+        private static void createApplicationFolder()
         {
             Directory.CreateDirectory(DOSH_APPFOLDER);
-
             Directory.CreateDirectory(DOSH_LOGFOLDER);
             Directory.CreateDirectory(DOSH_REPORT);
             Directory.CreateDirectory(DOSH_TEMPORARY);
+        }
+
+        /// <summary>
+        /// Initialize app.exe.config
+        /// </summary>
+        private static void initializeAppConfig()
+        {
+            var conf = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            conf.AppSettings.Settings["appLogFile"].Value = Path.Combine(DOSH_LOGFOLDER, "dosh-.log");
+            conf.Save(ConfigurationSaveMode.Modified);
+            ConfigurationManager.RefreshSection("appSettings");
         }
     }
 }
