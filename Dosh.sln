@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test_Dosh.Core.Logger", "Te
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dosh.Middleware.DB", "Dosh.Middleware.DB\Dosh.Middleware.DB.csproj", "{C9974BBF-D0D8-47A3-B09C-E11B30BF5E87}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dosh.Middleware.MQ", "Dosh.Middleware.MQ\Dosh.Middleware.MQ.csproj", "{97E51251-3263-4F14-A7C0-797A137BAD53}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,10 @@ Global
 		{C9974BBF-D0D8-47A3-B09C-E11B30BF5E87}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C9974BBF-D0D8-47A3-B09C-E11B30BF5E87}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C9974BBF-D0D8-47A3-B09C-E11B30BF5E87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97E51251-3263-4F14-A7C0-797A137BAD53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97E51251-3263-4F14-A7C0-797A137BAD53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97E51251-3263-4F14-A7C0-797A137BAD53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97E51251-3263-4F14-A7C0-797A137BAD53}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -85,6 +91,7 @@ Global
 		{0B5C185C-0740-4827-A20F-909765855789} = {7CFA9E26-9823-4E9F-B5C1-B56CFE0A8B51}
 		{508ED88A-E822-4D97-83C8-3B2B6BD1DEB1} = {7CFA9E26-9823-4E9F-B5C1-B56CFE0A8B51}
 		{C9974BBF-D0D8-47A3-B09C-E11B30BF5E87} = {45497896-3E00-4632-8752-E9ACC91B2D03}
+		{97E51251-3263-4F14-A7C0-797A137BAD53} = {45497896-3E00-4632-8752-E9ACC91B2D03}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A4C91FD5-2BE5-4A30-8EA9-24FBBAC541AB}
