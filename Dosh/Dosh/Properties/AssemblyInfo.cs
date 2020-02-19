@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Dosh")]
 [assembly: AssemblyDescription("Dosh CLI")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("HP Inc.")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Dosh")]
 [assembly: AssemblyCopyright("Copyright EtaAoki, 2020")]
 [assembly: AssemblyTrademark("")]
