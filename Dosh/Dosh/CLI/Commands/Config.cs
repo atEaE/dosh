@@ -4,17 +4,17 @@ using System;
 namespace Dosh.CLI.Commands
 {
     /// <summary>
-    /// Initialize command
+    /// Configuration command
     /// </summary>
-    [Verb("init")]
-    public class Init : CommandBase
+    [Verb("config")]
+    public class Config : CommandBase
     {
         /// <summary>
         /// Execute inner command.
         /// </summary>
         protected override void OnExecute()
         {
-            Console.WriteLine("Init command is not yet implemented.");           
+            Console.WriteLine("Config command is not yet implemented.");
         }
     }
 }

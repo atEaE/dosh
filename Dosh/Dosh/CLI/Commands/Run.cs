@@ -14,7 +14,7 @@ namespace Dosh.CLI.Commands
         /// </summary>
         protected override void OnExecute()
         {
-            Console.WriteLine("Run command Execute");
+            Console.WriteLine("Run command is not yet implemented.");
         }
     }
 }
