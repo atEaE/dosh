@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="CLI\Commands\Base\CommandBase.cs" />
     <Compile Include="CLI\Commands\Base\ICommand.cs" />
+    <Compile Include="CLI\Commands\Config.cs" />
     <Compile Include="CLI\Commands\Init.cs" />
     <Compile Include="CLI\Commands\Run.cs" />
     <Compile Include="CLI\Const\CLIConst.cs" />
