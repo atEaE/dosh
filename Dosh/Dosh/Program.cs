@@ -24,9 +24,10 @@ namespace Dosh.CLI
 
             initializeAppConfig();
 
-            var result = Parser.Default.ParseArguments<Init, Run>(args);
+            var result = Parser.Default.ParseArguments<Init, Run, Config>(args);
             result.WithParsed<Init>(cmd => cmd.Execute())
-                  .WithParsed<Run>(cmd => cmd.Execute());
+                  .WithParsed<Run>(cmd => cmd.Execute())
+                  .WithParsed<Config>(cmd => cmd.Execute());
         }
 
         /// <summary>

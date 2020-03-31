@@ -1,5 +1,6 @@
 ﻿using CommandLine;
 using System;
+using System.Configuration;
 
 namespace Dosh.CLI.Commands
 {
@@ -14,7 +15,20 @@ namespace Dosh.CLI.Commands
         /// </summary>
         protected override void OnExecute()
         {
-            Console.WriteLine("Config command is not yet implemented.");
+            show();
+        }
+
+        /// <summary>
+        /// Displays the application's settings.
+        /// </summary>
+        private void show()
+        {
+            var appSettingsKeys = ConfigurationManager.AppSettings.AllKeys;
+            foreach (var key in appSettingsKeys)
+            {
+                var value = ConfigurationManager.AppSettings[key];
+                Console.WriteLine($"{key} = {value}");
+            }
         }
     }
 }
