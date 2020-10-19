@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 using YamlDotNet.Serialization;
 
 namespace Dosh.Core.DoshFile
@@ -16,6 +17,6 @@ namespace Dosh.Core.DoshFile
         public Definition Definition { get; set; }
 
         [YamlMember(Alias = "tests")]
-        public TestSet TestSets { get; set; }
+        public List<TestSet> TestSets { get; set; }
     }
 }

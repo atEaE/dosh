@@ -20,3 +20,14 @@ definition:
     port: 1234
     channel: "mq-channel"
     mqMgr: "mq-manager"
+
+# テストケース定義セクション
+tests:
+  - id: "identifier"
+    setup:
+      - type: "db"
+        resource: "./test/data/db/init.sql"
+      - type: "mq"
+        resource: "./test/data/mq/init.xml"
+    run: "run"
+    cleanup: "cleanup"
