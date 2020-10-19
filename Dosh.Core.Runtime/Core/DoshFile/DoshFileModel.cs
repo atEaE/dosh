@@ -16,6 +16,6 @@ namespace Dosh.Core.DoshFile
         public Definition Definition { get; set; }
 
         [YamlMember(Alias = "tests")]
-        public TestTaskSet TestSets { get; set; }
+        public TestSet TestSets { get; set; }
     }
 }

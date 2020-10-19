@@ -1,10 +1,22 @@
-﻿version: "1.0"
+﻿# テストVersionを表すVersion情報
+version: "1.0"
+
+# .doshファイル内で共通するGlobalな各種定義を行うセクション
 definition:
+  # DBの定義に当たるセクション
   db:
     id: "identifier"
+    type: "sqlserver"
     host: "localhost"
     database: "test-db"
     user: "test-user"
     pass: "test-pass"
     schema: "default"
-  
+
+  # MQの定義に当たるセクション
+  mq:
+    id: "identifier"
+    host: "localhost"
+    port: 1234
+    channel: "mq-channel"
+    mqMgr: "mq-manager"
