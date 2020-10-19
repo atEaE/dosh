@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,7 +46,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\Crawler\Base\ICrawler.cs" />
+    <Compile Include="Core\DoshFile\DBDefinition.cs" />
+    <Compile Include="Core\DoshFile\Definition.cs" />
     <Compile Include="Core\DoshFile\DoshFileModel.cs" />
+    <Compile Include="Core\DoshFile\TestTaskSet.cs" />
     <Compile Include="Core\Evaluator\Base\IEvaluator.cs" />
     <Compile Include="Core\Injector\Base\IInjector.cs" />
     <Compile Include="Core\Initializer\Base\IInitializer.cs" />

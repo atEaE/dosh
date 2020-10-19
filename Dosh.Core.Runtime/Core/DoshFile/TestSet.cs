@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dosh.Core.Parser
+namespace Dosh.Core.DoshFile
 {
     /// <summary>
-    /// Parser interface
+    /// TestSet model
     /// </summary>
-    public interface IParser<T>
+    public class TestSet
     {
-        T Parse(string value);
     }
 }

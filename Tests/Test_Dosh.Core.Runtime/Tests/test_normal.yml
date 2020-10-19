@@ -1,0 +1,10 @@
+﻿version: "1.0"
+definition:
+  db:
+    id: "identifier"
+    host: "localhost"
+    database: "test-db"
+    user: "test-user"
+    pass: "test-pass"
+    schema: "default"
+  
