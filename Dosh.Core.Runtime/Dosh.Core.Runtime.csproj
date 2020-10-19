@@ -39,14 +39,24 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="YamlDotNet, Version=8.0.0.0, Culture=neutral, PublicKeyToken=ec19458f3c15af5e, processorArchitecture=MSIL">
+      <HintPath>..\packages\YamlDotNet.8.1.2\lib\net45\YamlDotNet.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\Crawler\Base\ICrawler.cs" />
+    <Compile Include="Core\DoshFile\DoshFileModel.cs" />
     <Compile Include="Core\Evaluator\Base\IEvaluator.cs" />
     <Compile Include="Core\Injector\Base\IInjector.cs" />
     <Compile Include="Core\Initializer\Base\IInitializer.cs" />
+    <Compile Include="Core\Parser\Base\IParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Compile Include="Core\Parser\DoshParser.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
