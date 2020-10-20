@@ -32,5 +32,10 @@ namespace Dosh.CLI.Const
         /// Dosh application temporary folder.
         /// </summary>
         public readonly static string DOSH_TEMPORARY = Path.Combine(DOSH_APPFOLDER, "Temp");
+
+        /// <summary>
+        /// Test directory for workspace
+        /// </summary>
+        public readonly static string DOSH_WORKSPACE_TEST = "__test__";
     }
 }

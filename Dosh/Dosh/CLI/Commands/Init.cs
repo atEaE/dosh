@@ -1,5 +1,7 @@
 ﻿using CommandLine;
 using System;
+using System.IO;
+using static Dosh.CLI.Const.CLIConst;
 
 namespace Dosh.CLI.Commands
 {
@@ -14,7 +16,26 @@ namespace Dosh.CLI.Commands
         /// </summary>
         protected override void OnExecute()
         {
-            Console.WriteLine("Init command is not yet implemented.");           
+            var testDirPath = Path.Combine(Directory.GetCurrentDirectory(), DOSH_WORKSPACE_TEST);
+            if (Directory.Exists(testDirPath))
+            {
+                Console.WriteLine($"The '${DOSH_WORKSPACE_TEST}' directory already exists.");
+                return; 
+            }
+
+            try
+            {
+                Console.WriteLine("Initialize dosh.");
+                var testDir = Directory.CreateDirectory(testDirPath);
+            }
+            catch(IOException ioEx)
+            {
+                Console.WriteLine("'__test__' directory creation failed. {0}", ioEx);
+            }
+            catch(UnauthorizedAccessException anAuthEx)
+            {
+                Console.WriteLine("Permission denied. {0}", anAuthEx);
+            }
         }
     }
 }
