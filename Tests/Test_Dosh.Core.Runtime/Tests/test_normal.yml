@@ -3,31 +3,59 @@ version: "1.0"
 
 # .doshファイル内で共通するGlobalな各種定義を行うセクション
 definition:
-  # DBの定義に当たるセクション
+  # DBの定義に当たるセクション(複数定義できるようにDictionary構造)
   db:
-    id: "identifier"
-    type: "sqlserver"
-    host: "localhost"
-    database: "test-db"
-    user: "test-user"
-    pass: "test-pass"
-    schema: "default"
+    test-db-a:
+      type: "sqlserver"
+      host: "localhost:8888"
+      database: "test-db-1"
+      user: "test-user-1"
+      pass: "test-pass-1"
+      schema: "default-1"
 
-  # MQの定義に当たるセクション
+    test-db-b:
+      type: "mysql"
+      host: "localhost:9999"
+      database: "test-db-2"
+      user: "test-user-2"
+      pass: "test-pass-2"
+      schema: "default-2"
+
+  # MQの定義に当たるセクション(複数定義できるようにDictionary構造)
   mq:
-    id: "identifier"
-    host: "localhost"
-    port: 1234
-    channel: "mq-channel"
-    mqMgr: "mq-manager"
+    MQW888:
+      host: "localhost:6666"
+      port: 1234
+      channel: "mq-channel-1"
+      mqMgr: "mq-manager-1"
+
+    MQW999:
+      host: "localhost:7777"
+      port: 5678
+      channel: "mq-channel-2"
+      mqMgr: "mq-manager-2"
 
 # テストケース定義セクション
 tests:
-  - id: "identifier"
+  case1:
+    # 事前処理
     setup:
       - type: "db"
         resource: "./test/data/db/init.sql"
       - type: "mq"
         resource: "./test/data/mq/init.xml"
-    run: "run"
-    cleanup: "cleanup"
+
+    # テスト開始処理
+    run:
+      type: "mq"
+      resource: "./test/initdata/ini.xml"
+      command: "cat text.txt"
+      crawler: "db"
+
+    # 事後処理
+    cleanup:
+      - type: "db"
+        target:
+          - "user_table"
+          - "department_table"
+          - "employ_table"

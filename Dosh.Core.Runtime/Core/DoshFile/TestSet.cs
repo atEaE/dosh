@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Data.Common;
+using System.Runtime.ConstrainedExecution;
+using System.Runtime.Serialization;
 using YamlDotNet.Serialization;
 
 namespace Dosh.Core.DoshFile
@@ -7,6 +8,7 @@ namespace Dosh.Core.DoshFile
     /// <summary>
     /// TestSet model
     /// </summary>
+    [DataContract]
     public class TestSet
     {
         [YamlMember(Alias = "id")]
@@ -16,15 +18,16 @@ namespace Dosh.Core.DoshFile
         public List<SetupConfig> SetupConfig { get; set; }
 
         [YamlMember(Alias = "run")]
-        public string Run { get; set; }
+        public RunConfig RunConfig { get; set; }
 
         [YamlMember(Alias = "cleanup")]
-        public string CleanupConf { get; set; }
+        public List<CleanupConfig> CleanupConfig { get; set; }
     }
 
     /// <summary>
     /// SetupConfig model
     /// </summary>
+    [DataContract]
     public class SetupConfig
     {
         [YamlMember(Alias = "type")]
@@ -32,5 +35,36 @@ namespace Dosh.Core.DoshFile
         
         [YamlMember(Alias = "resource")]
         public string Resource { get; set; }
+    }
+
+    /// <summary>
+    /// RunConfig model
+    /// </summary>
+    public class RunConfig
+    {
+        [YamlMember(Alias = "type")]
+        public string Type { get; set; }
+
+        [YamlMember(Alias = "resource")]
+        public string Resouce { get; set; }
+
+        [YamlMember(Alias = "command")]
+        public string Command { get; set; }
+
+        [YamlMember(Alias = "crawler")]
+        public string Crawler { get; set; }
+    }
+
+    /// <summary>
+    /// CleanupConfig model
+    /// </summary>
+    [DataContract]
+    public class CleanupConfig
+    {
+        [YamlMember(Alias = "type")]
+        public string Type { get; set; }
+
+        [YamlMember(Alias = "target")]
+        public List<string> Target { get; set; }
     }
 }

@@ -15,9 +15,9 @@ namespace Dosh.Core.DoshFile
     public class Definition
     {
         [YamlMember(Alias = "db")]
-        public DBDefinition DBDefinition { get; set; }
+        public Dictionary<string, DBDefinition> DBDefinitions { get; set; }
 
         [YamlMember(Alias = "mq")]
-        public MQDefinition MQDefinition { get; set; }
+        public Dictionary<string, MQDefinition> MQDefinitions { get; set; }
     }
 }
