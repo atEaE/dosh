@@ -128,173 +128,175 @@ namespace Dosh.CLI.Commands
                     }
                 }
 
-                #region __init__ direcotry section
+                scaffoldWkInitDirectory(testCasePath, t.Value);
+                scaffoldWkDataDirectory(testCasePath, t.Value);
+                scaffoldWkEvidenceDirectory(testCasePath, t.Value);
 
-                var initPath = Path.Combine(testCasePath, "__init__");
-                if (!Directory.Exists(initPath))
-                {
-                    try
-                    {
-                        Directory.CreateDirectory(initPath);
-                    }
-                    catch (IOException ioEx)
-                    {
-                        var msg = string.Format(CLI_00102, $"__test__/{t.Key}/__init__", ioEx);
-                        throw new DoshScaffoldException(msg, ioEx);
-                    }
-                    catch (UnauthorizedAccessException anAuthEx)
-                    {
-                        var msg = string.Format(CLI_00101, anAuthEx);
-                        throw new DoshScaffoldException(msg, anAuthEx);
-                    }
-                    catch (System.Exception ex)
-                    {
-                        var msg = string.Format(CLI_00100, ex);
-                        throw new DoshScaffoldException(msg, ex);
-                    }
-                }
-                t.Value.SetupConfig.ForEach(s =>
-                {
-                    var iniTypePath = Path.Combine(initPath, s.Type);
-                    if (!Directory.Exists(iniTypePath))
-                    {
-                        try
-                        {
-                            Directory.CreateDirectory(iniTypePath);
-                        }
-                        catch (IOException ioEx)
-                        {
-                            var msg = string.Format(CLI_00102, $"__test__/{t.Key}/__init__/{s.Type}", ioEx);
-                            throw new DoshScaffoldException(msg, ioEx);
-                        }
-                        catch (UnauthorizedAccessException anAuthEx)
-                        {
-                            var msg = string.Format(CLI_00101, anAuthEx);
-                            throw new DoshScaffoldException(msg, anAuthEx);
-                        }
-                        catch (System.Exception ex)
-                        {
-                            var msg = string.Format(CLI_00100, ex);
-                            throw new DoshScaffoldException(msg, ex);
-                        }
-                    }
-                });
-
-                #endregion
-
-                #region evidence direcotry section
-
-                var evidencePath = Path.Combine(testCasePath, "evidence");
-                if (!Directory.Exists(evidencePath))
-                {
-                    try
-                    {
-                        Directory.CreateDirectory(evidencePath);
-                    }
-                    catch (IOException ioEx)
-                    {
-                        var msg = string.Format(CLI_00102, $"__test__/{t.Key}/evidence", ioEx);
-                        throw new DoshScaffoldException(msg, ioEx);
-                    }
-                    catch (UnauthorizedAccessException anAuthEx)
-                    {
-                        var msg = string.Format(CLI_00101, anAuthEx);
-                        throw new DoshScaffoldException(msg, anAuthEx);
-                    }
-                    catch (System.Exception ex)
-                    {
-                        var msg = string.Format(CLI_00100, ex);
-                        throw new DoshScaffoldException(msg, ex);
-                    }
-                }
-                var evidenceStepCnt = 1;
-                t.Value.RunConfig.Steps.ForEach(r =>
-                {
-                    var stepPath = Path.Combine(evidencePath, $"step{evidenceStepCnt}");
-                    if (!Directory.Exists(stepPath))
-                    {
-                        try
-                        {
-                            Directory.CreateDirectory(stepPath);
-                        }
-                        catch (IOException ioEx)
-                        {
-                            var msg = string.Format(CLI_00102, $"__test__/{t.Key}/evidence/step{evidenceStepCnt}", ioEx);
-                            throw new DoshScaffoldException(msg, ioEx);
-                        }
-                        catch (UnauthorizedAccessException anAuthEx)
-                        {
-                            var msg = string.Format(CLI_00101, anAuthEx);
-                            throw new DoshScaffoldException(msg, anAuthEx);
-                        }
-                        catch (System.Exception ex)
-                        {
-                            var msg = string.Format(CLI_00100, ex);
-                            throw new DoshScaffoldException(msg, ex);
-                        }
-                    }
-                    evidenceStepCnt++;
-                });
-
-                #endregion
-
-                #region data direcotry section
-
-                var dataPath = Path.Combine(testCasePath, "data");
-                if (!Directory.Exists(dataPath))
-                {
-                    try
-                    {
-                        Directory.CreateDirectory(dataPath);
-                    }
-                    catch (IOException ioEx)
-                    {
-                        var msg = string.Format(CLI_00102, $"__test__/{t.Key}/data", ioEx);
-                        throw new DoshScaffoldException(msg, ioEx);
-                    }
-                    catch (UnauthorizedAccessException anAuthEx)
-                    {
-                        var msg = string.Format(CLI_00101, anAuthEx);
-                        throw new DoshScaffoldException(msg, anAuthEx);
-                    }
-                    catch (System.Exception ex)
-                    {
-                        var msg = string.Format(CLI_00100, ex);
-                        throw new DoshScaffoldException(msg, ex);
-                    }
-                }
-                var dataStepCnt = 1;
-                t.Value.RunConfig.Steps.ForEach(r =>
-                {
-                    var stepPath = Path.Combine(dataPath, $"step{dataStepCnt}");
-                    if (!Directory.Exists(stepPath))
-                    {
-                        try
-                        {
-                            Directory.CreateDirectory(stepPath);
-                        }
-                        catch (IOException ioEx)
-                        {
-                            var msg = string.Format(CLI_00102, $"__test__/{t.Key}/data/step{dataStepCnt}", ioEx);
-                            throw new DoshScaffoldException(msg, ioEx);
-                        }
-                        catch (UnauthorizedAccessException anAuthEx)
-                        {
-                            var msg = string.Format(CLI_00101, anAuthEx);
-                            throw new DoshScaffoldException(msg, anAuthEx);
-                        }
-                        catch (System.Exception ex)
-                        {
-                            var msg = string.Format(CLI_00100, ex);
-                            throw new DoshScaffoldException(msg, ex);
-                        }
-                    }
-                    dataStepCnt++;
-                });
-
-                #endregion
             }).AsParallel();
             scaffolds.ForAll(s => s.Invoke());
+        }
+
+        private void scaffoldWkInitDirectory(string testCasePath, TestSet testSet)
+        {
+            var initPath = Path.Combine(testCasePath, "__init__");
+            if (!Directory.Exists(initPath))
+            {
+                try
+                {
+                    Directory.CreateDirectory(initPath);
+                }
+                catch (IOException ioEx)
+                {
+                    var msg = string.Format(CLI_00102, testCasePath, ioEx);
+                    throw new DoshScaffoldException(msg, ioEx);
+                }
+                catch (UnauthorizedAccessException anAuthEx)
+                {
+                    var msg = string.Format(CLI_00101, anAuthEx);
+                    throw new DoshScaffoldException(msg, anAuthEx);
+                }
+                catch (System.Exception ex)
+                {
+                    var msg = string.Format(CLI_00100, ex);
+                    throw new DoshScaffoldException(msg, ex);
+                }
+            }
+            testSet.SetupConfig.ForEach(s =>
+            {
+                var iniTypePath = Path.Combine(initPath, s.Type);
+                if (!Directory.Exists(iniTypePath))
+                {
+                    try
+                    {
+                        Directory.CreateDirectory(iniTypePath);
+                    }
+                    catch (IOException ioEx)
+                    {
+                        var msg = string.Format(CLI_00102, iniTypePath, ioEx);
+                        throw new DoshScaffoldException(msg, ioEx);
+                    }
+                    catch (UnauthorizedAccessException anAuthEx)
+                    {
+                        var msg = string.Format(CLI_00101, anAuthEx);
+                        throw new DoshScaffoldException(msg, anAuthEx);
+                    }
+                    catch (System.Exception ex)
+                    {
+                        var msg = string.Format(CLI_00100, ex);
+                        throw new DoshScaffoldException(msg, ex);
+                    }
+                }
+            });
+        }
+
+        private void scaffoldWkDataDirectory(string testCasePath, TestSet testSet)
+        {
+            var dataPath = Path.Combine(testCasePath, "data");
+            if (!Directory.Exists(dataPath))
+            {
+                try
+                {
+                    Directory.CreateDirectory(dataPath);
+                }
+                catch (IOException ioEx)
+                {
+                    var msg = string.Format(CLI_00102, dataPath, ioEx);
+                    throw new DoshScaffoldException(msg, ioEx);
+                }
+                catch (UnauthorizedAccessException anAuthEx)
+                {
+                    var msg = string.Format(CLI_00101, anAuthEx);
+                    throw new DoshScaffoldException(msg, anAuthEx);
+                }
+                catch (System.Exception ex)
+                {
+                    var msg = string.Format(CLI_00100, ex);
+                    throw new DoshScaffoldException(msg, ex);
+                }
+            }
+            var stepCnt = 1;
+            testSet.RunConfig.Steps.ForEach(r =>
+            {
+                var stepPath = Path.Combine(dataPath, $"step{stepCnt}");
+                if (!Directory.Exists(stepPath))
+                {
+                    try
+                    {
+                        Directory.CreateDirectory(stepPath);
+                    }
+                    catch (IOException ioEx)
+                    {
+                        var msg = string.Format(CLI_00102, stepPath, ioEx);
+                        throw new DoshScaffoldException(msg, ioEx);
+                    }
+                    catch (UnauthorizedAccessException anAuthEx)
+                    {
+                        var msg = string.Format(CLI_00101, anAuthEx);
+                        throw new DoshScaffoldException(msg, anAuthEx);
+                    }
+                    catch (System.Exception ex)
+                    {
+                        var msg = string.Format(CLI_00100, ex);
+                        throw new DoshScaffoldException(msg, ex);
+                    }
+                }
+                stepCnt++;
+            });
+        }
+
+        private void scaffoldWkEvidenceDirectory(string testCasePath, TestSet testSet)
+        {
+            var evidencePath = Path.Combine(testCasePath, "evidence");
+            if (!Directory.Exists(evidencePath))
+            {
+                try
+                {
+                    Directory.CreateDirectory(evidencePath);
+                }
+                catch (IOException ioEx)
+                {
+                    var msg = string.Format(CLI_00102, evidencePath, ioEx);
+                    throw new DoshScaffoldException(msg, ioEx);
+                }
+                catch (UnauthorizedAccessException anAuthEx)
+                {
+                    var msg = string.Format(CLI_00101, anAuthEx);
+                    throw new DoshScaffoldException(msg, anAuthEx);
+                }
+                catch (System.Exception ex)
+                {
+                    var msg = string.Format(CLI_00100, ex);
+                    throw new DoshScaffoldException(msg, ex);
+                }
+            }
+            var stepCnt = 1;
+            testSet.RunConfig.Steps.ForEach(r =>
+            {
+                var stepPath = Path.Combine(evidencePath, $"step{stepCnt}");
+                if (!Directory.Exists(stepPath))
+                {
+                    try
+                    {
+                        Directory.CreateDirectory(stepPath);
+                    }
+                    catch (IOException ioEx)
+                    {
+                        var msg = string.Format(CLI_00102, stepPath, ioEx);
+                        throw new DoshScaffoldException(msg, ioEx);
+                    }
+                    catch (UnauthorizedAccessException anAuthEx)
+                    {
+                        var msg = string.Format(CLI_00101, anAuthEx);
+                        throw new DoshScaffoldException(msg, anAuthEx);
+                    }
+                    catch (System.Exception ex)
+                    {
+                        var msg = string.Format(CLI_00100, ex);
+                        throw new DoshScaffoldException(msg, ex);
+                    }
+                }
+                stepCnt++;
+            });
         }
     }
 }

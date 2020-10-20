@@ -18,12 +18,6 @@ namespace Dosh.Core.DoshFile
 
         [YamlMember(Alias = "cleanup")]
         public List<CleanupConfig> CleanupConfig { get; set; }
-
-        public void Scaffold()
-        {
-
-
-        }
     }
 
     /// <summary>
