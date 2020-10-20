@@ -1,13 +1,14 @@
-﻿using System.Data.Common;
+﻿using System;
+using System.Data.Common;
 
 namespace Dosh.Middleware.DB.Middleware.Base
 {
-    interface IDBClient
+    public interface IDBClient : IDisposable
     {
         DbConnection CreateDbConnection(string providerName, string connectionString);
 
-        void DbCommandSelect(DbConnection connection, string queryString);
+        void DbCommandSelect(string queryString);
 
-        void ExecuteDbCommand(DbConnection connection, string queryString);
+        void ExecuteDbCommand(string queryString);
     }
 }
