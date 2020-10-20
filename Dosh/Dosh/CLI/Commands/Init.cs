@@ -1,7 +1,7 @@
 ﻿using CommandLine;
 using System;
 using System.IO;
-using static Dosh.CLI.Const.CLIConst;
+using static Dosh.CLI.Helper.FileHelper;
 
 namespace Dosh.CLI.Commands
 {
@@ -16,7 +16,7 @@ namespace Dosh.CLI.Commands
         /// </summary>
         protected override void OnExecute()
         {
-            var testDirPath = DOSH_WORKSPACE_TESTFOLDER;
+            var testDirPath = DOSH_WORKSPACE_TEST_DIRECTORY;
             if (Directory.Exists(testDirPath))
             {
                 Console.WriteLine($"The '__test__' directory already exists.");

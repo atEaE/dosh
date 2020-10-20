@@ -3,7 +3,7 @@ using Dosh.Core.DoshFile;
 using Dosh.Core.Parser;
 using System;
 using System.IO;
-using static Dosh.CLI.Const.CLIConst;
+using static Dosh.CLI.Helper.FileHelper;
 
 namespace Dosh.CLI.Commands
 {
@@ -49,7 +49,7 @@ namespace Dosh.CLI.Commands
                 return;
             }
 
-            var testIdPath = Path.Combine(DOSH_WORKSPACE_TESTFOLDER, result.ID);
+            var testIdPath = GetTestIdDirectory(result.ID);
             foreach (var test in result.TestSets)
             {
                 var casePath = Path.Combine(testIdPath, test.Key);
@@ -66,7 +66,7 @@ namespace Dosh.CLI.Commands
         private bool ensureTestExecute(DoshFileModel doshConfig)
         {
             var result = false;
-            var testIdPath = Path.Combine(DOSH_WORKSPACE_TESTFOLDER, doshConfig.ID);
+            var testIdPath = GetTestIdDirectory(doshConfig.ID);
             if (!Directory.Exists(testIdPath))
             {
                 try
