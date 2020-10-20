@@ -25,6 +25,9 @@ namespace Test_Dosh.Core.Runtime.Core.Parser
             // version check
             Assert.AreEqual("1.0", result.Version);
 
+            // id check
+            Assert.AreEqual("SampleService", result.ID);
+
             // define check(DB)
             var dbTestCase = new[]
             {

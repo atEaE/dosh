@@ -1,6 +1,9 @@
 ﻿# テストVersionを表すVersion情報
 version: "1.0"
 
+# テスト識別子
+id: "SampleService"
+
 # .doshファイル内で共通するGlobalな各種定義を行うセクション
 definition:
   # DBの定義に当たるセクション(複数定義できるようにDictionary構造)

@@ -16,10 +16,10 @@ namespace Dosh.CLI.Commands
         /// </summary>
         protected override void OnExecute()
         {
-            var testDirPath = Path.Combine(Directory.GetCurrentDirectory(), DOSH_WORKSPACE_TEST);
+            var testDirPath = DOSH_WORKSPACE_TESTFOLDER;
             if (Directory.Exists(testDirPath))
             {
-                Console.WriteLine($"The '${DOSH_WORKSPACE_TEST}' directory already exists.");
+                Console.WriteLine($"The '__test__' directory already exists.");
                 return; 
             }
 

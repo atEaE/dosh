@@ -36,6 +36,6 @@ namespace Dosh.CLI.Const
         /// <summary>
         /// Test directory for workspace
         /// </summary>
-        public readonly static string DOSH_WORKSPACE_TEST = "__test__";
+        public readonly static string DOSH_WORKSPACE_TESTFOLDER = Path.Combine(Directory.GetCurrentDirectory(), "__test__");
     }
 }

@@ -13,6 +13,9 @@ namespace Dosh.Core.DoshFile
         [YamlMember(Alias = "version")]
         public string Version { get; set; }
 
+        [YamlMember(Alias = "id")]
+        public string ID { get; set; }
+
         [YamlMember(Alias = "definition")]
         public Definition Definition { get; set; }
 
