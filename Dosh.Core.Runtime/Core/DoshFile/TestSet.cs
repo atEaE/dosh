@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.ConstrainedExecution;
 using System.Runtime.Serialization;
 using YamlDotNet.Serialization;
 
@@ -11,9 +10,6 @@ namespace Dosh.Core.DoshFile
     [DataContract]
     public class TestSet
     {
-        [YamlMember(Alias = "id")]
-        public string ID { get; set; }
-
         [YamlMember(Alias = "setup")]
         public List<SetupConfig> SetupConfig { get; set; }
 
@@ -22,6 +18,12 @@ namespace Dosh.Core.DoshFile
 
         [YamlMember(Alias = "cleanup")]
         public List<CleanupConfig> CleanupConfig { get; set; }
+
+        public void Scaffold()
+        {
+
+
+        }
     }
 
     /// <summary>
@@ -41,6 +43,17 @@ namespace Dosh.Core.DoshFile
     /// RunConfig model
     /// </summary>
     public class RunConfig
+    {
+        /// <summary> 
+        /// Test steps
+        /// </summary>
+        public List<Step> Steps { get; set; }
+    }
+
+    /// <summary>
+    /// Step model
+    /// </summary>
+    public class Step
     {
         [YamlMember(Alias = "type")]
         public string Type { get; set; }

@@ -141,4 +141,28 @@
   <data name="CLI_00008" xml:space="preserve">
     <value />
   </data>
+  <data name="CLI_00100" xml:space="preserve">
+    <value>An unexpected error has occurred. {0}</value>
+    <comment>An unexpected error has occurred. {0}</comment>
+  </data>
+  <data name="CLI_00101" xml:space="preserve">
+    <value>Permission denied. {0}</value>
+    <comment>Permission denied. {0}</comment>
+  </data>
+  <data name="CLI_00102" xml:space="preserve">
+    <value>'{0}' directory creation failed. {1}</value>
+    <comment>'{0}' directory creation failed. {1}</comment>
+  </data>
+  <data name="CLI_00103" xml:space="preserve">
+    <value>Test identification directory does not exist.</value>
+    <comment>Test identification directory does not exist.</comment>
+  </data>
+  <data name="CLI_00104" xml:space="preserve">
+    <value>.dosh.yml file does not exist.</value>
+    <comment>.dosh.yml file does not exist.</comment>
+  </data>
+  <data name="CLI_00105" xml:space="preserve">
+    <value>Failed to parse the .dosh.yml file. {0}</value>
+    <comment>Failed to parse the .dosh.yml file. {0}</comment>
+  </data>
 </root>

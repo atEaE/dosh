@@ -50,10 +50,16 @@ tests:
 
     # テスト開始処理
     run:
-      type: "mq"
-      resource: "./test/initdata/ini.xml"
-      command: "cat text.txt"
-      crawler: "db"
+      steps:
+        - type: "mq"
+          resource: "./test/initdata/ini1.xml"
+          command: "cat text1.txt"
+          crawler: "db"
+
+        - type: "mq"
+          resource: "./test/initdata/ini2.xml"
+          command: "cat text2.txt"
+          crawler: "db"
 
     # 事後処理
     cleanup:

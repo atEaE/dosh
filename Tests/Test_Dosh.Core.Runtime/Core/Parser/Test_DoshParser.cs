@@ -75,14 +75,15 @@ namespace Test_Dosh.Core.Runtime.Core.Parser
                     },
                     RunConfig = new RunConfig()
                     {
-                        Type = "mq",
-                        Resouce = "./test/initdata/ini.xml",
-                        Command = "cat text.txt",
-                        Crawler = "db"
+                        Steps = new List<Step>()
+                        {
+                            new Step(){ Type = "mq", Resouce = "./test/initdata/ini1.xml", Command = "cat text1.txt", Crawler = "db" },
+                            new Step(){ Type = "mq", Resouce = "./test/initdata/ini2.xml", Command = "cat text2.txt", Crawler = "db" }
+                        }
                     },
                     CleanupConfig = new[]
                     {
-                        new CleanupConfig() { Type = "db", Target = new List<string>(){ "user_table", "department_table", "employ_table" }}
+                        new CleanupConfig() { Type = "db", Target = new List<string>(){ "user_table", "department_table", "employ_table" } }
                     }
                 }
             };
@@ -99,10 +100,13 @@ namespace Test_Dosh.Core.Runtime.Core.Parser
                 }
 
                 // run check
-                Assert.AreEqual(tc.RunConfig.Type, testSet.RunConfig.Type);
-                Assert.AreEqual(tc.RunConfig.Resouce, testSet.RunConfig.Resouce);
-                Assert.AreEqual(tc.RunConfig.Command, testSet.RunConfig.Command);
-                Assert.AreEqual(tc.RunConfig.Crawler, testSet.RunConfig.Crawler);
+                for (var i = 0; i < tc.RunConfig.Steps.Count; i++)
+                {
+                    Assert.AreEqual(tc.RunConfig.Steps[i].Type, testSet.RunConfig.Steps[i].Type);
+                    Assert.AreEqual(tc.RunConfig.Steps[i].Resouce, testSet.RunConfig.Steps[i].Resouce);
+                    Assert.AreEqual(tc.RunConfig.Steps[i].Command, testSet.RunConfig.Steps[i].Command);
+                    Assert.AreEqual(tc.RunConfig.Steps[i].Crawler, testSet.RunConfig.Steps[i].Crawler);
+                }
 
                 // cleanup check
                 for (var i = 0; i < tc.CleanupConfig.Length; i++)

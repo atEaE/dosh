@@ -36,6 +36,10 @@ namespace Dosh.CLI.Commands
             {
                 Console.WriteLine("Permission denied. {0}", anAuthEx);
             }
+            catch(System.Exception ex)
+            {
+                Console.WriteLine("An unexpected error has occurred. {0}", ex);
+            }
         }
     }
 }
