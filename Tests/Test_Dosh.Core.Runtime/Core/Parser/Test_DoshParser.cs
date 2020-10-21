@@ -77,8 +77,38 @@ namespace Test_Dosh.Core.Runtime.Core.Parser
                     {
                         Steps = new List<Step>()
                         {
-                            new Step(){ Type = "mq", Resouce = "./test/initdata/ini1.xml", Command = "cat text1.txt", Crawler = "db" },
-                            new Step(){ Type = "mq", Resouce = "./test/initdata/ini2.xml", Command = "cat text2.txt", Crawler = "db" }
+                            new Step()
+                            {
+                                Type = "mq",
+                                Resouce = "./test/initdata/ini1.xml",
+                                Command = "cat text1.txt",
+                                Crawler = new CrawlerConfig()
+                                {
+                                    Trigger = "mq-trigger",
+                                    Bots = new Dictionary<string, BotConfig>()
+                                    {
+                                        ["db-craw"] = new BotConfig() { Type = "db", Target = new List<string>{ "sample_table1", "sample_table2" } },
+                                        ["log-craw"] = new BotConfig() { Type = "file", Target = new List<string>{ "./test1.log" } },
+                                        ["mq-craw"] = new BotConfig() { Type = "mq", Target = new List<string>{ "LCL.MQQ.123" }}
+                                    }
+                                }
+                            },
+                            new Step()
+                            {
+                                Type = "mq",
+                                Resouce = "./test/initdata/ini2.xml",
+                                Command = "cat text2.txt",
+                                Crawler = new CrawlerConfig()
+                                {
+                                    Trigger = "mq-trigger",
+                                    Bots = new Dictionary<string, BotConfig>()
+                                    {
+                                        ["db-craw"] = new BotConfig() { Type = "db", Target = new List<string>{ "sample_table3", "sample_table4" } },
+                                        ["log-craw"] = new BotConfig() { Type = "file", Target = new List<string>{ "./test2.log" } },
+                                        ["mq-craw"] = new BotConfig() { Type = "mq", Target = new List<string>{ "LCL.MQQ.456" }}
+                                    }
+                                }
+                            },
                         }
                     },
                     CleanupConfig = new[]
@@ -105,7 +135,16 @@ namespace Test_Dosh.Core.Runtime.Core.Parser
                     Assert.AreEqual(tc.RunConfig.Steps[i].Type, testSet.RunConfig.Steps[i].Type);
                     Assert.AreEqual(tc.RunConfig.Steps[i].Resouce, testSet.RunConfig.Steps[i].Resouce);
                     Assert.AreEqual(tc.RunConfig.Steps[i].Command, testSet.RunConfig.Steps[i].Command);
-                    Assert.AreEqual(tc.RunConfig.Steps[i].Crawler, testSet.RunConfig.Steps[i].Crawler);
+
+                    // crawler check
+                    Assert.AreEqual(tc.RunConfig.Steps[i].Crawler.Trigger, testSet.RunConfig.Steps[i].Crawler.Trigger);
+                    foreach (var tcBot in tc.RunConfig.Steps[i].Crawler.Bots)
+                    {
+                        var bots = testSet.RunConfig.Steps[i].Crawler.Bots[tcBot.Key];
+                        Assert.IsNotNull(bots);
+                        Assert.AreEqual(tcBot.Value.Type, bots.Type);
+                        CollectionAssert.AreEqual(tcBot.Value.Target, bots.Target);
+                    }
                 }
 
                 // cleanup check

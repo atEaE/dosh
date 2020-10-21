@@ -54,42 +54,12 @@ tests:
         - type: "mq"
           resource: "./test/initdata/ini1.xml"
           command: "cat text1.txt"
-          crawler:
-            trigger: "mq-trigger"
-            bots:
-              db-craw:
-                type: "db"
-                target:
-                  - "sample_table1"
-                  - "sample_table2"
-              log-craw:
-                type: "file"
-                target:
-                  - "./test1.log"
-              mq-craw:
-                type: "mq"
-                target:
-                  - LCL.MQQ.123
+          crawler: "db"
 
         - type: "mq"
           resource: "./test/initdata/ini2.xml"
           command: "cat text2.txt"
-          crawler:
-            trigger: "mq-trigger"
-            bots:
-              db-craw:
-                type: "db"
-                target:
-                  - "sample_table3"
-                  - "sample_table4"
-              log-craw:
-                type: "file"
-                target:
-                  - "./test2.log"
-              mq-craw:
-                type: "mq"
-                target:
-                  - LCL.MQQ.456
+          crawler: "db"
 
     # 事後処理
     cleanup:

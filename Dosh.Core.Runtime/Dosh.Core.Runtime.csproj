@@ -46,11 +46,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\Crawler\Base\ICrawler.cs" />
-    <Compile Include="Core\DoshFile\DBDefinition.cs" />
-    <Compile Include="Core\DoshFile\Definition.cs" />
+    <Compile Include="Core\DoshFile\Test\CleanupConfig.cs" />
+    <Compile Include="Core\DoshFile\Test\CrawlerConfig.cs" />
+    <Compile Include="Core\DoshFile\Definition\DBDefinition.cs" />
+    <Compile Include="Core\DoshFile\Definition\Definition.cs" />
     <Compile Include="Core\DoshFile\DoshFileModel.cs" />
-    <Compile Include="Core\DoshFile\MQDefinition.cs" />
-    <Compile Include="Core\DoshFile\TestSet.cs" />
+    <Compile Include="Core\DoshFile\Definition\MQDefinition.cs" />
+    <Compile Include="Core\DoshFile\Test\RunConfig.cs" />
+    <Compile Include="Core\DoshFile\Test\SetupConfig.cs" />
+    <Compile Include="Core\DoshFile\Test\TestSet.cs" />
     <Compile Include="Core\Evaluator\Base\IEvaluator.cs" />
     <Compile Include="Core\Injector\Base\IInjector.cs" />
     <Compile Include="Core\Initializer\Base\IInitializer.cs" />
