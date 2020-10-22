@@ -8,7 +8,7 @@ namespace Dosh.Core.DoshFile
     /// TestSet model
     /// </summary>
     [DataContract]
-    public class TestSet
+    public class TestSet : IRefsAllowsModel
     {
         [YamlMember(Alias = "setup")]
         public List<SetupConfig> SetupConfig { get; set; }
@@ -18,5 +18,16 @@ namespace Dosh.Core.DoshFile
 
         [YamlMember(Alias = "cleanup")]
         public List<CleanupConfig> CleanupConfig { get; set; }
+
+        /// <summary>
+        /// Reference resolution.
+        /// </summary>
+        /// <param name="definition">definition model</param>
+        public void RefsResolution(Definition definition)
+        {
+            SetupConfig.ForEach(t => t.RefsResolution(definition));
+            RunConfig.Steps.ForEach(t => t.RefsResolution(definition));
+            CleanupConfig.ForEach(t => t.RefsResolution(definition));
+        }
     }
 }

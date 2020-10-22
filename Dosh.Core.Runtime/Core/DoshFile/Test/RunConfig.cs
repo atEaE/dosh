@@ -17,7 +17,7 @@ namespace Dosh.Core.DoshFile
     /// <summary>
     /// Step model
     /// </summary>
-    public class Step
+    public class Step : IRefsAllowsModel
     {
         [YamlMember(Alias = "type")]
         public string Type { get; set; }
@@ -30,5 +30,14 @@ namespace Dosh.Core.DoshFile
 
         [YamlMember(Alias = "crawler")]
         public CrawlerConfig Crawler { get; set; }
+
+        /// <summary>
+        /// Reference resolution.
+        /// </summary>
+        /// <param name="definition">definition model</param>
+        public void RefsResolution(Definition definition)
+        {
+            Crawler.RefsResolution(definition);
+        }
     }
 }

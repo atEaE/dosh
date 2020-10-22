@@ -38,6 +38,41 @@ definition:
       channel: "mq-channel-2"
       mqMgr: "mq-manager-2"
 
+  # Crawlerの定義に当たるセクション(複数定義可能、かつRunConfigでの定義も可能)
+  crawler:
+    cr_1:
+      trigger: "mq-trigger"
+      bots:
+        db-craw:
+          type: "db"
+          target:
+            - "sample_table1"
+            - "sample_table2"
+        log-craw:
+          type: "file"
+          target:
+            - "./test1.log"
+        mq-craw:
+          type: "mq"
+          target:
+            - LCL.MQQ.123
+    cr_2:
+      trigger: "mq-trigger"
+      bots:
+        db-craw:
+          type: "db"
+          target:
+            - "sample_table3"
+            - "sample_table4"
+        log-craw:
+          type: "file"
+          target:
+            - "./test2.log"
+        mq-craw:
+          type: "mq"
+          target:
+            - LCL.MQQ.456
+
 # テストケース定義セクション
 tests:
   case1:
@@ -54,12 +89,14 @@ tests:
         - type: "mq"
           resource: "./test/initdata/ini1.xml"
           command: "cat text1.txt"
-          crawler: "db"
+          crawler:
+            refs: $crawler/cr_1
 
         - type: "mq"
           resource: "./test/initdata/ini2.xml"
           command: "cat text2.txt"
-          crawler: "db"
+          crawler:
+            refs: $crawler/cr_2
 
     # 事後処理
     cleanup:

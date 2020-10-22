@@ -15,5 +15,8 @@ namespace Dosh.Core.DoshFile
 
         [YamlMember(Alias = "mq")]
         public Dictionary<string, MQDefinition> MQDefinitions { get; set; }
+
+        [YamlMember(Alias = "crawler")]
+        public Dictionary<string, CrawlerConfig> CrawlerDefinitions { get; set; }
     }
 }

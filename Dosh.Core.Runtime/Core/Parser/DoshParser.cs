@@ -1,6 +1,7 @@
 ﻿using Dosh.Core.DoshFile;
 using System;
 using System.IO;
+using System.Linq;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
@@ -16,7 +17,11 @@ namespace Dosh.Core.Parser
             var deserializer = new DeserializerBuilder()
                                     .WithNamingConvention(CamelCaseNamingConvention.Instance)
                                     .Build();
-            return deserializer.Deserialize<DoshFileModel>(value);
+
+            var doshFile = deserializer.Deserialize<DoshFileModel>(value);
+            doshFile.TestSets.AsParallel().ForAll(t => t.Value.RefsResolution(doshFile.Definition));
+
+            return doshFile;
         }
     }
 }
