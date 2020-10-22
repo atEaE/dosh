@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\Parser\Test_DoshParser.cs" />
+    <Compile Include="Core\SemanticsAnalyzer\Test_DoshFileSemanticsAnalyzer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -2,10 +2,12 @@
 using Dosh.CLI.Exception;
 using Dosh.Core.DoshFile;
 using Dosh.Core.Parser;
+using Dosh.Core.SementicsAnalyzer;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using static Dosh.CLI.Helper.FileHelper;
 using static Dosh.Properties.Resources;
 
@@ -54,6 +56,15 @@ namespace Dosh.CLI.Commands
             }
 
             scaffoldTestCases(result);
+            var exes = new DoshFileSemanticsAnalyzer().Analyze(result);
+            exes.ForEach(e =>
+            {
+                e.Execute();
+                while (!e.IsFinished)
+                {
+                    Thread.Sleep(200);
+                }
+            });
         }
 
         /// <summary>

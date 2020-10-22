@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Dosh.Core.Injector;
+using System.Collections.Generic;
 using YamlDotNet.Serialization;
 
 namespace Dosh.Core.DoshFile
@@ -30,6 +31,9 @@ namespace Dosh.Core.DoshFile
 
         [YamlMember(Alias = "crawler")]
         public CrawlerConfig Crawler { get; set; }
+
+        [YamlIgnore]
+        public IInjector Injector { get; set; }
 
         /// <summary>
         /// Reference resolution.

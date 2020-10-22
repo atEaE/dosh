@@ -9,7 +9,7 @@ namespace Dosh.Core.Initializer
     /// <summary>
     /// Initializer Interface
     /// </summary>
-    interface IInitializer
+    public interface IInitializer
     {
         void Initialize();
     }
