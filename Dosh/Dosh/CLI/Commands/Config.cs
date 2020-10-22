@@ -1,5 +1,7 @@
 ﻿using CommandLine;
+using Dosh.Core;
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 
 namespace Dosh.CLI.Commands
@@ -10,6 +12,9 @@ namespace Dosh.CLI.Commands
     [Verb("config")]
     public class Config : CommandBase
     {
+        [Option('i', "init")]
+        public string Init { get; set; }
+
         /// <summary>
         /// Execute inner command.
         /// </summary>
@@ -23,12 +28,26 @@ namespace Dosh.CLI.Commands
         /// </summary>
         private void show()
         {
-            var appSettingsKeys = ConfigurationManager.AppSettings.AllKeys;
-            foreach (var key in appSettingsKeys)
+            var path = @"C:\Workspace\10_個人開発\OSS\dosh\Dosh\Dosh\bin\Debug\Initializer";
+            var plugins = PluginLoader.LoadPlugins(path);
+
+            try
             {
-                var value = ConfigurationManager.AppSettings[key];
-                Console.WriteLine($"{key} = {value}");
+                var result = plugins[Init];
+                result.Initialize();
             }
+            catch(KeyNotFoundException ex)
+            {
+                Console.WriteLine("Not exists dll.");
+            }
+
+
+            //var appSettingsKeys = ConfigurationManager.AppSettings.AllKeys;
+            //foreach (var key in appSettingsKeys)
+            //{
+            //    var value = ConfigurationManager.AppSettings[key];
+            //    Console.WriteLine($"{key} = {value}");
+            //}
         }
     }
 }

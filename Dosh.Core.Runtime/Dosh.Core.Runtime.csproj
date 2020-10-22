@@ -64,6 +64,7 @@
     <Compile Include="Core\Initializer\Base\IInitializer.cs" />
     <Compile Include="Core\Injector\MQPutInjector.cs" />
     <Compile Include="Core\Parser\Base\IParser.cs" />
+    <Compile Include="Core\PluginLoader.cs" />
     <Compile Include="Core\SemanticsAnalyzer\Base\ISementicsAnalyzer.cs" />
     <Compile Include="Core\SemanticsAnalyzer\DoshFileSemanticsAnalyzer.cs" />
     <Compile Include="Core\TestExec\Base\ITestExec.cs" />
@@ -80,6 +81,10 @@
     <ProjectReference Include="..\Dosh.Core.Logger\Dosh.Core.Logger.csproj">
       <Project>{318b0cac-1854-486f-8688-70d0494331cb}</Project>
       <Name>Dosh.Core.Logger</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dosh.Core.Provider\Dosh.Core.Provider.csproj">
+      <Project>{ed33c5df-4fa3-4076-bb41-3e103a1f3c7c}</Project>
+      <Name>Dosh.Core.Provider</Name>
     </ProjectReference>
     <ProjectReference Include="..\Dosh.Middleware.DB\Dosh.Middleware.DB.csproj">
       <Project>{c9974bbf-d0d8-47a3-b09c-e11b30bf5e87}</Project>

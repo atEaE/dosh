@@ -97,10 +97,23 @@
       <Project>{318b0cac-1854-486f-8688-70d0494331cb}</Project>
       <Name>Dosh.Core.Logger</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Dosh.Core.Provider\Dosh.Core.Provider.csproj">
+      <Project>{ed33c5df-4fa3-4076-bb41-3e103a1f3c7c}</Project>
+      <Name>Dosh.Core.Provider</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Dosh.Core.Runtime\Dosh.Core.Runtime.csproj">
       <Project>{ccb2d966-0e95-43ed-821e-70c8ed2f07bb}</Project>
       <Name>Dosh.Core.Runtime</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Initializer\DBUpdateInitializer.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Initializer\Dosh.Core.Provider.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

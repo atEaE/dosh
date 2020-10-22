@@ -1,10 +1,8 @@
 ﻿using Dosh.Core.Initializer;
-using Dosh.Core.Injector;
 using Dosh.Core.Parser;
 using Dosh.Core.SementicsAnalyzer;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
-using System.Threading;
 
 namespace Test_Dosh.Core.Runtime.Core.SemanticsAnalyzer
 {
