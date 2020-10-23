@@ -45,9 +45,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Middleware\Base\IDBClient.cs" />
-    <Compile Include="Middleware\Client\ConnectionString.cs" />
+    <Compile Include="Middleware\Util\ConnectionString.cs" />
     <Compile Include="Middleware\Client\DBClient.cs" />
-    <Compile Include="Middleware\Client\ProviderName.cs" />
+    <Compile Include="Middleware\Util\DBProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

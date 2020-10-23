@@ -1,6 +1,6 @@
 ﻿using System.Data.SqlClient;
 
-namespace Dosh.Middleware.DB.Middleware.Client
+namespace Dosh.Middleware.DB.Middleware.Util
 {
     public static class ConnectionString
     {

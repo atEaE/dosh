@@ -2,8 +2,10 @@
 using Dosh.Middleware.DB.Middleware.Base;
 using Serilog.Events;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
+using static Dosh.Middleware.DB.Properties.Resources;
 
 namespace Dosh.Middleware.DB.Middleware.Client
 {
@@ -12,7 +14,6 @@ namespace Dosh.Middleware.DB.Middleware.Client
     /// </summary>
     public class DBClient : IDBClient
     {
-
         /// <summary>
         /// DbConnection
         /// </summary>
@@ -43,7 +44,7 @@ namespace Dosh.Middleware.DB.Middleware.Client
         /// <param name="providerName">propvider name</param>
         /// <param name="connectionString">Connection string</param>
         /// <returns>DbConnection Class. if the Connection were not made, return null</returns>
-        public DbConnection CreateDbConnection(string providerName, string connectionString)
+        public IDbConnection CreateDbConnection(string providerName, string connectionString)
         {
             if (connectionString != null)
             {
@@ -54,6 +55,8 @@ namespace Dosh.Middleware.DB.Middleware.Client
                     Connection = factory.CreateConnection();
                     Connection.ConnectionString = connectionString;
                     Connection.Open();
+
+                    Logger.OutputLog(LogEventLevel.Information, string.Format(DB_0001, Connection.Database));
                 }
                 catch (Exception ex)
                 {
@@ -72,12 +75,14 @@ namespace Dosh.Middleware.DB.Middleware.Client
         /// Implement select query
         /// <summary>
         /// <param name="queryString">query string</param>
-        public void DbCommandSelect(string queryString)
+        public List<List<string>> DbCommandSelect(string queryString)
         {
             if (Connection == null)
             {
                 throw new Exception();
             }
+
+            var records = new List<List<string>>();
 
             try
             {
@@ -89,6 +94,25 @@ namespace Dosh.Middleware.DB.Middleware.Client
 
                 while (reader.Read())
                 {
+                    var record = new List<string>();
+
+                    if (records.Count == 0)
+                    {
+                        for (var i = 0; i < reader.FieldCount; i++)
+                        {
+                            record.Add(reader.GetName(i));
+                        }
+                        records.Add(record);
+                        record = new List<string>();
+                    }
+
+                    for (var i = 0; i < reader.FieldCount; i++)
+                    {
+                        record.Add(reader.GetValue(i).ToString());
+                    }
+
+                    records.Add(record);
+                    Logger.OutputLog(LogEventLevel.Debug, string.Format(DB_0002, queryString, record));
                 }
 
                 if (!reader.IsClosed) reader.Close();
@@ -97,6 +121,8 @@ namespace Dosh.Middleware.DB.Middleware.Client
             {
                 Logger.OutputLog(LogEventLevel.Error, ex.Message);
             }
+
+            return records;
         }
 
         /// <summary>
@@ -116,6 +142,7 @@ namespace Dosh.Middleware.DB.Middleware.Client
                 command.CommandText = queryString;
 
                 command.ExecuteNonQuery();
+                Logger.OutputLog(LogEventLevel.Debug, string.Format(DB_0003, queryString));
             }
             catch (Exception ex)
             {

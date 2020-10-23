@@ -1,7 +1,7 @@
-﻿using Dosh.Middleware.DB.Middleware.Client;
+﻿using Dosh.Middleware.DB.Middleware.Util;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Test_Dosh.Middleware.DB.Middleware.Context
+namespace Test_Dosh.Middleware.DB.Middleware.Util
 {
     /// <summary>
     /// ConnectionStringClass unit test.
