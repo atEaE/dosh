@@ -50,7 +50,7 @@ namespace Dosh.Middleware.DB.Middleware.Client
             {
                 try
                 {
-                    var factory = DbProviderFactories.GetFactory(providerName);
+                    var factory = getProviderFactory(providerName);
 
                     Connection = factory.CreateConnection();
                     Connection.ConnectionString = connectionString;
@@ -151,6 +151,21 @@ namespace Dosh.Middleware.DB.Middleware.Client
         }
 
         /// <summary>
+        /// getProviderFactory
+        /// </summary>
+        /// <param name="providerName">providerName</param>
+        /// <returns>DbProviderFactory</returns>
+        private DbProviderFactory getProviderFactory(string providerName)
+        {
+            DbProviderFactory factory;
+
+            if (Connection != null) factory = DbProviderFactories.GetFactory(Connection);
+            else factory = DbProviderFactories.GetFactory(providerName);
+            
+            return factory;
+        }
+
+        /// <summary>
         /// Destroy the resource.
         /// </summary>
         public void Dispose()
@@ -168,8 +183,9 @@ namespace Dosh.Middleware.DB.Middleware.Client
             if (!disposed)
             {
                 if (disposing)
-                { }
-                Connection.Close();
+                {
+                    Connection.Close();
+                }
                 disposed = true;
             }
         }

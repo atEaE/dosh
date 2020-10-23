@@ -49,6 +49,9 @@
     <Compile Include="Middleware\Client\DBClient.cs" />
     <Compile Include="Middleware\Util\DBProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs" />
+    <Compile Include="Properties\Resources.en-US.Designer.cs" />
+    <Compile Include="Properties\Resources.ja-JP.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Dosh.Core.Logger\Dosh.Core.Logger.csproj">
@@ -58,6 +61,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.en-US.resx" />
+    <EmbeddedResource Include="Properties\Resources.ja-JP.resx" />
+    <EmbeddedResource Include="Properties\Resources.resx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
