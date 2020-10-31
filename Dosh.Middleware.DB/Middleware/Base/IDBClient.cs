@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 
 namespace Dosh.Middleware.DB.Middleware.Base
 {
+    /// <summary>
+    /// DBClient interface
+    /// </summary>
     public interface IDBClient : IDisposable
     {
-        IDbConnection CreateDbConnection(string providerName, string connectionString);
+        void Connect();
 
-        List<List<string>> DbCommandSelect(string targetTable);
+        List<List<string>> ExecuteQuery(string targetTable);
 
-        void ExecuteDbCommand(string queryString);
+        int ExecuteNonQuery(string query);
     }
 }

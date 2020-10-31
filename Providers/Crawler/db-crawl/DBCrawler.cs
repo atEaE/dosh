@@ -3,7 +3,6 @@ using Dosh.Core.DoshFile;
 using Dosh.Core.Logger;
 using Dosh.Core.Provider.Crawler;
 using Dosh.Middleware.DB.Middleware.Base;
-using Dosh.Middleware.DB.Middleware.Util;
 using System;
 using System.Globalization;
 using System.IO;
@@ -61,25 +60,22 @@ namespace db_crawl
         /// </summary>
         private void exportRecordToCsv(string exportDirectoryPath)
         {
-            using (var connection = DBClient.CreateDbConnection(DBProvider.GetProviderName(DBDefinition.Type),
-                                                                ConnectionString.CreateConnectionString(DBDefinition.Type, DBDefinition.Host, DBDefinition.Database, DBDefinition.UserId, DBDefinition.Password)))
+            DBClient.Connect();
 
+            foreach (var targetTable in BotConfig.Target)
             {
-                foreach (var targetTable in BotConfig.Target)
-                {
-                    var records = DBClient.DbCommandSelect($"select * from {targetTable}");
+                var records = DBClient.ExecuteQuery($"select * from {targetTable}");
 
-                    using (var writer = new StreamWriter(Path.Combine(exportDirectoryPath, $"{targetTable}.csv"), true))
-                    using (var csvWriter = new CsvWriter(writer, CultureInfo.CurrentCulture))
+                using (var writer = new StreamWriter(Path.Combine(exportDirectoryPath, $"{targetTable}.csv"), true))
+                using (var csvWriter = new CsvWriter(writer, CultureInfo.CurrentCulture))
+                {
+                    records.ForEach(record =>
                     {
-                        records.ForEach(record =>
-                        {
-                            csvWriter.WriteField(record);
-                            csvWriter.NextRecord();
-                        });
+                        csvWriter.WriteField(record);
                         csvWriter.NextRecord();
-                        csvWriter.Flush();
-                    }
+                    });
+                    csvWriter.NextRecord();
+                    csvWriter.Flush();
                 }
             }
         }

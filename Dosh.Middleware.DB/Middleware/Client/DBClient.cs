@@ -15,9 +15,19 @@ namespace Dosh.Middleware.DB.Middleware.Client
     public class DBClient : IDBClient
     {
         /// <summary>
+        /// DB propvider
+        /// </summary>
+        private readonly string provider;
+
+        /// <summary>
+        /// Connectin strings
+        /// </summary>
+        private readonly string connectionStrings;
+
+        /// <summary>
         /// DbConnection
         /// </summary>
-        private DbConnection Connection = null;
+        private DbConnection dbConn;
 
         /// <summary> 
         /// Resource disposed flag 
@@ -32,95 +42,116 @@ namespace Dosh.Middleware.DB.Middleware.Client
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="logger"></param>
-        public DBClient(ILogger logger)
+        /// <param name="provider">DB provider</param>
+        /// <param name="connectionStrings">Connection strings</param>
+        /// <param name="logger">logger</param>
+        public DBClient(string provider, string connectionStrings, ILogger logger)
         {
+            if (string.IsNullOrEmpty(provider))
+            {
+                throw new ArgumentNullException(nameof(provider));
+            }
+
+            if (string.IsNullOrEmpty(connectionStrings))
+            {
+                throw new ArgumentNullException(nameof(connectionStrings));
+            }
+
+            this.provider = provider;
+            this.connectionStrings = connectionStrings;
             Logger = logger;
         }
 
         /// <summary>
-        /// Create dbConnection
+        /// Constructor
         /// </summary>
-        /// <param name="providerName">propvider name</param>
-        /// <param name="connectionString">Connection string</param>
-        /// <returns>DbConnection Class. if the Connection were not made, return null</returns>
-        public IDbConnection CreateDbConnection(string providerName, string connectionString)
+        /// <param name="dbConn">DB connection</param>
+        public DBClient(DbConnection dbConn)
         {
-            if (connectionString != null)
-            {
-                try
-                {
-                    var factory = getProviderFactory(providerName);
-
-                    Connection = factory.CreateConnection();
-                    Connection.ConnectionString = connectionString;
-                    Connection.Open();
-
-                    Logger.OutputLog(LogEventLevel.Information, string.Format(DB_0001, Connection.Database));
-                }
-                catch (Exception ex)
-                {
-                    if (Connection != null)
-                    {
-                        Connection = null;
-                    }
-                    Logger.OutputLog(LogEventLevel.Error, ex.Message);
-                }
-            }
-
-            return Connection;
+            this.dbConn = dbConn;
         }
 
         /// <summary>
-        /// Implement select query
-        /// <summary>
-        /// <param name="queryString">query string</param>
-        public List<List<string>> DbCommandSelect(string queryString)
+        /// connect database.
+        /// </summary>
+        public void Connect()
         {
-            if (Connection == null)
+            try
             {
-                throw new Exception();
+                var factory = DbProviderFactories.GetFactory(provider);
+                dbConn = factory.CreateConnection();
+                dbConn.ConnectionString = connectionStrings;
+                dbConn.Open();
+
+                Logger.OutputLog(LogEventLevel.Debug, string.Format(DB_0001, dbConn.Database));
+            }
+            catch(Exception ex)
+            {
+                if (dbConn != null)
+                {
+                    dbConn.Close();
+                }
+                throw ex;
+            }
+        }
+
+        /// <summary>
+        /// disconnect database.
+        /// </summary>
+        public void Disconnect()
+        {
+            dbConn.Close();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="query"></param>
+        /// <exception cref="InvalidOperationException"></exception>
+        /// <returns></returns>
+        public List<List<string>> ExecuteQuery(string query)
+        {
+            if (dbConn == null)
+            {
+                throw new InvalidOperationException("The connection to the DB does not exist.");
+            }
+
+            if (dbConn.State != ConnectionState.Open)
+            {
+                throw new InvalidOperationException("The DB connection is not open.");
             }
 
             var records = new List<List<string>>();
 
-            try
+            var command = dbConn.CreateCommand();
+            command.CommandText = query;
+            command.CommandType = CommandType.Text;
+            var reader = command.ExecuteReader();
+
+            while (reader.Read())
             {
-                DbCommand command = Connection.CreateCommand();
-                command.CommandText = queryString;
-                command.CommandType = CommandType.Text;
+                var record = new List<string>();
 
-                DbDataReader reader = command.ExecuteReader();
-
-                while (reader.Read())
+                if (records.Count == 0)
                 {
-                    var record = new List<string>();
-
-                    if (records.Count == 0)
-                    {
-                        for (var i = 0; i < reader.FieldCount; i++)
-                        {
-                            record.Add(reader.GetName(i));
-                        }
-                        records.Add(record);
-                        record = new List<string>();
-                    }
-
                     for (var i = 0; i < reader.FieldCount; i++)
                     {
-                        record.Add(reader.GetValue(i).ToString());
+                        record.Add(reader.GetName(i));
                     }
-
                     records.Add(record);
-                    Logger.OutputLog(LogEventLevel.Debug, string.Format(DB_0002, queryString, record));
+                    record = new List<string>();
                 }
 
-                if (!reader.IsClosed) reader.Close();
+                for (var i = 0; i < reader.FieldCount; i++)
+                {
+                    record.Add(reader.GetValue(i).ToString());
+                }
+
+                records.Add(record);
+                Logger.OutputLog(LogEventLevel.Debug, string.Format(DB_0002, query, record));
             }
-            catch (Exception ex)
-            {
-                Logger.OutputLog(LogEventLevel.Error, ex.Message);
-            }
+
+            if (!reader.IsClosed) reader.Close();
 
             return records;
         }
@@ -128,26 +159,26 @@ namespace Dosh.Middleware.DB.Middleware.Client
         /// <summary>
         /// Implement query
         /// </summary>
-        /// <param name="queryString">query string</param>
-        public void ExecuteDbCommand(string queryString)
+        /// <param name="query">query string</param>
+        /// <returns></returns>
+        public int ExecuteNonQuery(string query)
         {
-            if (Connection == null)
+            if (dbConn == null)
             {
-                throw new Exception();
+                throw new InvalidOperationException("The connection to the DB does not exist.");
             }
 
-            try
+            if (dbConn.State != ConnectionState.Open)
             {
-                DbCommand command = Connection.CreateCommand();
-                command.CommandText = queryString;
+                throw new InvalidOperationException("The DB connection is not open.");
+            }
 
-                command.ExecuteNonQuery();
-                Logger.OutputLog(LogEventLevel.Debug, string.Format(DB_0003, queryString));
-            }
-            catch (Exception ex)
-            {
-                Logger.OutputLog(LogEventLevel.Error, ex.Message);
-            }
+            var command = dbConn.CreateCommand();
+            command.CommandText = query;
+            var result = command.ExecuteNonQuery();
+
+            Logger.OutputLog(LogEventLevel.Debug, string.Format(DB_0003, query));
+            return result;
         }
 
         /// <summary>
@@ -157,13 +188,16 @@ namespace Dosh.Middleware.DB.Middleware.Client
         /// <returns>DbProviderFactory</returns>
         private DbProviderFactory getProviderFactory(string providerName)
         {
+
             DbProviderFactory factory;
 
-            if (Connection != null) factory = DbProviderFactories.GetFactory(Connection);
+            if (dbConn != null) factory = DbProviderFactories.GetFactory(dbConn);
             else factory = DbProviderFactories.GetFactory(providerName);
             
             return factory;
         }
+
+        #region Dispose function
 
         /// <summary>
         /// Destroy the resource.
@@ -184,7 +218,7 @@ namespace Dosh.Middleware.DB.Middleware.Client
             {
                 if (disposing)
                 {
-                    Connection.Close();
+                    Disconnect();
                 }
                 disposed = true;
             }
@@ -197,5 +231,7 @@ namespace Dosh.Middleware.DB.Middleware.Client
         {
             Dispose(false);
         }
+
+        #endregion
     }
 }
