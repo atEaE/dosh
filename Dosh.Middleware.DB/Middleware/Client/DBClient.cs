@@ -2,8 +2,10 @@
 using Dosh.Middleware.DB.Middleware.Base;
 using Serilog.Events;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
+using static Dosh.Middleware.DB.Properties.Resources;
 
 namespace Dosh.Middleware.DB.Middleware.Client
 {
@@ -12,8 +14,25 @@ namespace Dosh.Middleware.DB.Middleware.Client
     /// </summary>
     public class DBClient : IDBClient
     {
-        ILogger Logger;
+        /// <summary>
+        /// DbConnection
+        /// </summary>
+        private DbConnection Connection = null;
 
+        /// <summary> 
+        /// Resource disposed flag 
+        /// </summary>
+        private bool disposed = false;
+
+        /// <summary>
+        /// Logger
+        /// </summary>
+        private readonly ILogger Logger;
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="logger"></param>
         public DBClient(ILogger logger)
         {
             Logger = logger;
@@ -23,97 +42,160 @@ namespace Dosh.Middleware.DB.Middleware.Client
         /// Create dbConnection
         /// </summary>
         /// <param name="providerName">propvider name</param>
-        /// <param name="connectionString">connection string</param>
-        /// <returns>DbConnection Class. if the connection were not made, return null</returns>
-        public DbConnection CreateDbConnection(string providerName, string connectionString)
+        /// <param name="connectionString">Connection string</param>
+        /// <returns>DbConnection Class. if the Connection were not made, return null</returns>
+        public IDbConnection CreateDbConnection(string providerName, string connectionString)
         {
-            DbConnection connection = null;
-
             if (connectionString != null)
             {
                 try
                 {
-                    var factory = DbProviderFactories.GetFactory(providerName);
+                    var factory = getProviderFactory(providerName);
 
-                    connection = factory.CreateConnection();
-                    connection.ConnectionString = connectionString;
+                    Connection = factory.CreateConnection();
+                    Connection.ConnectionString = connectionString;
+                    Connection.Open();
+
+                    Logger.OutputLog(LogEventLevel.Information, string.Format(DB_0001, Connection.Database));
                 }
                 catch (Exception ex)
                 {
-                    if (connection != null)
+                    if (Connection != null)
                     {
-                        connection = null;
+                        Connection = null;
                     }
                     Logger.OutputLog(LogEventLevel.Error, ex.Message);
                 }
             }
 
-            return connection;
+            return Connection;
         }
 
         /// <summary>
         /// Implement select query
         /// <summary>
-        /// <param name="connection">Db connection</param>
         /// <param name="queryString">query string</param>
-        public void DbCommandSelect(DbConnection connection, string queryString)
+        public List<List<string>> DbCommandSelect(string queryString)
         {
-            if (connection == null)
+            if (Connection == null)
             {
                 throw new Exception();
             }
 
-            using (connection)
+            var records = new List<List<string>>();
+
+            try
             {
-                try
+                DbCommand command = Connection.CreateCommand();
+                command.CommandText = queryString;
+                command.CommandType = CommandType.Text;
+
+                DbDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
                 {
-                    DbCommand command = connection.CreateCommand();
-                    command.CommandText = queryString;
-                    command.CommandType = CommandType.Text;
+                    var record = new List<string>();
 
-                    connection.Open();
-
-                    DbDataReader reader = command.ExecuteReader();
-
-                    while (reader.Read())
+                    if (records.Count == 0)
                     {
+                        for (var i = 0; i < reader.FieldCount; i++)
+                        {
+                            record.Add(reader.GetName(i));
+                        }
+                        records.Add(record);
+                        record = new List<string>();
                     }
+
+                    for (var i = 0; i < reader.FieldCount; i++)
+                    {
+                        record.Add(reader.GetValue(i).ToString());
+                    }
+
+                    records.Add(record);
+                    Logger.OutputLog(LogEventLevel.Debug, string.Format(DB_0002, queryString, record));
                 }
-                catch (Exception ex)
-                {
-                    Logger.OutputLog(LogEventLevel.Error, ex.Message);
-                }
+
+                if (!reader.IsClosed) reader.Close();
             }
+            catch (Exception ex)
+            {
+                Logger.OutputLog(LogEventLevel.Error, ex.Message);
+            }
+
+            return records;
         }
 
         /// <summary>
         /// Implement query
         /// </summary>
-        /// <param name="connection">Db connection</param>
         /// <param name="queryString">query string</param>
-        public void ExecuteDbCommand(DbConnection connection, string queryString)
+        public void ExecuteDbCommand(string queryString)
         {
-            if (connection == null)
+            if (Connection == null)
             {
                 throw new Exception();
             }
 
-            using (connection)
+            try
             {
-                try
-                {
-                    DbCommand command = connection.CreateCommand();
-                    command.CommandText = queryString;
+                DbCommand command = Connection.CreateCommand();
+                command.CommandText = queryString;
 
-                    connection.Open();
-
-                    command.ExecuteNonQuery();
-                }
-                catch (Exception ex)
-                {
-                    Logger.OutputLog(LogEventLevel.Error, ex.Message);
-                }
+                command.ExecuteNonQuery();
+                Logger.OutputLog(LogEventLevel.Debug, string.Format(DB_0003, queryString));
             }
+            catch (Exception ex)
+            {
+                Logger.OutputLog(LogEventLevel.Error, ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// getProviderFactory
+        /// </summary>
+        /// <param name="providerName">providerName</param>
+        /// <returns>DbProviderFactory</returns>
+        private DbProviderFactory getProviderFactory(string providerName)
+        {
+            DbProviderFactory factory;
+
+            if (Connection != null) factory = DbProviderFactories.GetFactory(Connection);
+            else factory = DbProviderFactories.GetFactory(providerName);
+            
+            return factory;
+        }
+
+        /// <summary>
+        /// Destroy the resource.
+        /// </summary>
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// Destroy the resource.
+        /// </summary>
+        /// <param name="disposing">disposing</param>
+        protected void Dispose(bool disposing)
+        {
+            if (!disposed)
+            {
+                if (disposing)
+                {
+                    Connection.Close();
+                }
+                disposed = true;
+            }
+        }
+
+        /// <summary>
+        /// Finalizer
+        /// </summary>
+        ~DBClient()
+        {
+            Dispose(false);
         }
     }
 }
