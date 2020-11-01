@@ -46,7 +46,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\Crawler\Base\ICrawler.cs" />
     <Compile Include="Core\DoshFile\IRefsAllowsModel.cs" />
     <Compile Include="Core\DoshFile\Test\CleanupConfig.cs" />
     <Compile Include="Core\DoshFile\Test\CrawlerConfig.cs" />
@@ -58,11 +57,6 @@
     <Compile Include="Core\DoshFile\Test\SetupConfig.cs" />
     <Compile Include="Core\DoshFile\Test\TestSet.cs" />
     <Compile Include="Core\DoshFile\Test\TriggerConfig.cs" />
-    <Compile Include="Core\Evaluator\Base\IEvaluator.cs" />
-    <Compile Include="Core\Initializer\DBInitializer.cs" />
-    <Compile Include="Core\Injector\Base\IInjector.cs" />
-    <Compile Include="Core\Initializer\Base\IInitializer.cs" />
-    <Compile Include="Core\Injector\MQPutInjector.cs" />
     <Compile Include="Core\Parser\Base\IParser.cs" />
     <Compile Include="Core\PluginLoader.cs" />
     <Compile Include="Core\SemanticsAnalyzer\Base\ISementicsAnalyzer.cs" />

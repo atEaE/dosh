@@ -1,4 +1,4 @@
-﻿using Dosh.Core.Injector;
+﻿using Dosh.Core.Provider.Injector;
 using System.Collections.Generic;
 using YamlDotNet.Serialization;
 

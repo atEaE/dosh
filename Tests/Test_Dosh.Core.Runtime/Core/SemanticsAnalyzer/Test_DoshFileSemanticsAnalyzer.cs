@@ -1,5 +1,4 @@
-﻿using Dosh.Core.Initializer;
-using Dosh.Core.Parser;
+﻿using Dosh.Core.Parser;
 using Dosh.Core.SementicsAnalyzer;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
@@ -28,10 +27,6 @@ namespace Test_Dosh.Core.Runtime.Core.SemanticsAnalyzer
 
 
             // cleanup check
-            var cleanupTestCase = new[]
-            {
-                new { Type = typeof(DBInitializer) }
-            };
         }
     }
 }

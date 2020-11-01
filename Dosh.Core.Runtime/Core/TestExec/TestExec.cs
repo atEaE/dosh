@@ -1,7 +1,6 @@
-﻿using Dosh.Core.Crawler;
-using Dosh.Core.DoshFile;
-using Dosh.Core.Initializer;
-using Dosh.Core.Injector;
+﻿using Dosh.Core.Provider.Crawler;
+using Dosh.Core.Provider.Initializer;
+using Dosh.Core.Provider.Injector;
 using System;
 using System.Collections.Generic;
 using System.Linq;

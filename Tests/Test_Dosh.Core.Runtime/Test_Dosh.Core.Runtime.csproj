@@ -64,6 +64,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\..\Dosh.Core.Provider\Dosh.Core.Provider.csproj">
+      <Project>{ed33c5df-4fa3-4076-bb41-3e103a1f3c7c}</Project>
+      <Name>Dosh.Core.Provider</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Dosh.Core.Runtime\Dosh.Core.Runtime.csproj">
       <Project>{ccb2d966-0e95-43ed-821e-70c8ed2f07bb}</Project>
       <Name>Dosh.Core.Runtime</Name>

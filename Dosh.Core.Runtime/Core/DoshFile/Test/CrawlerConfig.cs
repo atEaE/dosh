@@ -1,8 +1,5 @@
-﻿using Dosh.Core.Crawler;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Configuration;
-using System.Security.Cryptography.X509Certificates;
 using YamlDotNet.Serialization;
 
 

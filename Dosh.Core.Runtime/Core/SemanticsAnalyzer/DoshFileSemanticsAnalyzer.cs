@@ -1,11 +1,8 @@
 ﻿using Dosh.Core.DoshFile;
 using Dosh.Core.SemanticsAnalyzer;
 using Dosh.Core.TestExec;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Dosh.Core.SementicsAnalyzer
 {

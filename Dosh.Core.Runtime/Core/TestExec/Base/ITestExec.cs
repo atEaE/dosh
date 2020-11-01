@@ -1,6 +1,6 @@
-﻿using Dosh.Core.Crawler;
-using Dosh.Core.Initializer;
-using Dosh.Core.Injector;
+﻿using Dosh.Core.Provider.Crawler;
+using Dosh.Core.Provider.Initializer;
+using Dosh.Core.Provider.Injector;
 using System.Collections.Generic;
 
 namespace Dosh.Core.TestExec
