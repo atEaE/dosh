@@ -1,4 +1,4 @@
-﻿using Dosh.Middleware.DB.Middleware.Util;
+﻿using Dosh.Middleware.DB;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Test_Dosh.Middleware.DB.Middleware.Util

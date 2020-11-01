@@ -1,5 +1,4 @@
 ﻿using Dosh.Core.Logger;
-using Dosh.Middleware.DB.Middleware.Base;
 using Serilog.Events;
 using System;
 using System.Collections.Generic;
@@ -7,7 +6,7 @@ using System.Data;
 using System.Data.Common;
 using static Dosh.Middleware.DB.Properties.Resources;
 
-namespace Dosh.Middleware.DB.Middleware.Client
+namespace Dosh.Middleware.DB
 {
     /// <summary>
     /// DBClient Class.
@@ -78,10 +77,14 @@ namespace Dosh.Middleware.DB.Middleware.Client
         {
             try
             {
-                var factory = DbProviderFactories.GetFactory(provider);
-                dbConn = factory.CreateConnection();
-                dbConn.ConnectionString = connectionStrings;
-                dbConn.Open();
+                if (dbConn != null)
+                {
+                    openConnect();
+                }
+                else
+                {
+                    dbConn = newConnect();
+                }
 
                 Logger.OutputLog(LogEventLevel.Debug, string.Format(DB_0001, dbConn.Database));
             }
@@ -93,6 +96,28 @@ namespace Dosh.Middleware.DB.Middleware.Client
                 }
                 throw ex;
             }
+        }
+
+        private void openConnect()
+        {
+            if (dbConn.State == ConnectionState.Broken)
+            {
+                throw new InvalidOperationException("The connection is broken.");
+            }
+
+            if (dbConn.State == ConnectionState.Closed)
+            {
+                dbConn.Open();
+            }
+        }
+
+        private DbConnection newConnect()
+        {
+            var factory = DbProviderFactories.GetFactory(provider);
+            var dbConn = factory.CreateConnection();
+            dbConn.ConnectionString = connectionStrings;
+            dbConn.Open();
+            return dbConn;
         }
 
         /// <summary>
@@ -109,7 +134,7 @@ namespace Dosh.Middleware.DB.Middleware.Client
         /// <param name="query"></param>
         /// <exception cref="InvalidOperationException"></exception>
         /// <returns></returns>
-        public List<List<string>> ExecuteQuery(string query)
+        public List<Record> ExecuteQuery(string query)
         {
             if (dbConn == null)
             {
@@ -121,7 +146,7 @@ namespace Dosh.Middleware.DB.Middleware.Client
                 throw new InvalidOperationException("The DB connection is not open.");
             }
 
-            var records = new List<List<string>>();
+            var records = new List<Record>();
 
             var command = dbConn.CreateCommand();
             command.CommandText = query;
@@ -130,7 +155,7 @@ namespace Dosh.Middleware.DB.Middleware.Client
 
             while (reader.Read())
             {
-                var record = new List<string>();
+                var record = new Record();
 
                 if (records.Count == 0)
                 {
@@ -139,7 +164,7 @@ namespace Dosh.Middleware.DB.Middleware.Client
                         record.Add(reader.GetName(i));
                     }
                     records.Add(record);
-                    record = new List<string>();
+                    record = new Record();
                 }
 
                 for (var i = 0; i < reader.FieldCount; i++)

@@ -1,5 +1,5 @@
 ﻿using Dosh.Core.Logger;
-using Dosh.Middleware.DB.Middleware.Client;
+using Dosh.Middleware.DB;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;

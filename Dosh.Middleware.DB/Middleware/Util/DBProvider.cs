@@ -1,4 +1,4 @@
-﻿namespace Dosh.Middleware.DB.Middleware.Util
+﻿namespace Dosh.Middleware.DB
 {
     public readonly struct DBProviderName
     {

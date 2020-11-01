@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 
-namespace Dosh.Middleware.DB.Middleware.Base
+namespace Dosh.Middleware.DB
 {
     /// <summary>
     /// database record representation class

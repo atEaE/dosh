@@ -2,7 +2,7 @@
 using Dosh.Core.DoshFile;
 using Dosh.Core.Logger;
 using Dosh.Core.Provider.Crawler;
-using Dosh.Middleware.DB.Middleware.Base;
+using Dosh.Middleware.DB;
 using System;
 using System.Globalization;
 using System.IO;
