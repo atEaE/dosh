@@ -5,6 +5,9 @@
     /// </summary>
     public interface IInjector
     {
+        /// <summary>
+        /// Inject the specified process or data.
+        /// </summary>
         void Inject();
     }
 }

@@ -5,6 +5,9 @@
     /// </summary>
     interface IEvaluator
     {
+        /// <summary>
+        /// Specific evaluation of implementation results.
+        /// </summary>
         void Evaluate();
     }
 }
