@@ -3,7 +3,7 @@
     /// <summary>
     /// Evaluator Interface
     /// </summary>
-    interface IEvaluator
+    public interface IEvaluator
     {
         /// <summary>
         /// Specific evaluation of implementation results.
