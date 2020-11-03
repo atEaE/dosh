@@ -58,7 +58,7 @@
     <Compile Include="Core\DoshFile\Test\TestSet.cs" />
     <Compile Include="Core\DoshFile\Test\TriggerConfig.cs" />
     <Compile Include="Core\Parser\Base\IParser.cs" />
-    <Compile Include="Core\PluginLoader.cs" />
+    <Compile Include="Core\Plugin\PluginLoader.cs" />
     <Compile Include="Core\SemanticsAnalyzer\Base\ISementicsAnalyzer.cs" />
     <Compile Include="Core\SemanticsAnalyzer\DoshFileSemanticsAnalyzer.cs" />
     <Compile Include="Core\TestExec\Base\ITestExec.cs" />

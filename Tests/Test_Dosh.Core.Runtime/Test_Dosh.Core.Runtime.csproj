@@ -51,14 +51,15 @@
   <ItemGroup>
     <Compile Include="Core\Parser\Test_DoshParser.cs" />
     <Compile Include="Core\SemanticsAnalyzer\Test_DoshFileSemanticsAnalyzer.cs" />
+    <Compile Include="Plugin\Test_PluginLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="Tests\test_normal_refs.yml">
+    <None Include="Tests\Doshfile\test_normal_refs.yml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Tests\test_normal.yml">
+    <None Include="Tests\Doshfile\test_normal.yml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
@@ -72,6 +73,18 @@
       <Project>{ccb2d966-0e95-43ed-821e-70c8ed2f07bb}</Project>
       <Name>Dosh.Core.Runtime</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TestUtil\TestUtil.csproj">
+      <Project>{3ed2cd56-43ed-4c41-bd38-e9bb28c4b107}</Project>
+      <Name>TestUtil</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Tests\Plugin\Initializer\TestInitializerPlugin1.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Tests\Plugin\Initializer\TestInitializerPlugin2.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

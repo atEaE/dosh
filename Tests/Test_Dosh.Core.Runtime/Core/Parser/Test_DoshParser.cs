@@ -14,7 +14,7 @@ namespace Test_Dosh.Core.Runtime.Core.Parser
         {
             // setup
             var input = string.Empty;
-            using (var sr = new StreamReader("./Tests/test_normal.yml"))
+            using (var sr = new StreamReader("./Tests/Doshfile/test_normal.yml"))
             {
                 input = sr.ReadToEnd();
             }
@@ -170,7 +170,7 @@ namespace Test_Dosh.Core.Runtime.Core.Parser
         {
             // setup
             var input = string.Empty;
-            using (var sr = new StreamReader("./Tests/test_normal_refs.yml"))
+            using (var sr = new StreamReader("./Tests/Doshfile/test_normal_refs.yml"))
             {
                 input = sr.ReadToEnd();
             }

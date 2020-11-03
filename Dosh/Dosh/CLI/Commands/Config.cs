@@ -1,5 +1,5 @@
 ﻿using CommandLine;
-using Dosh.Core;
+using Dosh.Core.Plugin;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -29,7 +29,7 @@ namespace Dosh.CLI.Commands
         private void show()
         {
             var path = @"C:\Workspace\10_個人開発\OSS\dosh\Dosh\Dosh\bin\Debug\Initializer";
-            var plugins = PluginLoader.LoadPlugins(path);
+            var plugins = PluginLoader.LoadInitializerPlugins(path);
 
             try
             {

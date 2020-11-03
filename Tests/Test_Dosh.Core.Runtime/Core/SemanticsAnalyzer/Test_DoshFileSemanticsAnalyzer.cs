@@ -13,7 +13,7 @@ namespace Test_Dosh.Core.Runtime.Core.SemanticsAnalyzer
         {
             // setup
             var input = string.Empty;
-            using (var sr = new StreamReader("./Tests/test_normal.yml"))
+            using (var sr = new StreamReader("./Tests/Doshfile/test_normal.yml"))
             {
                 input = sr.ReadToEnd();
             }
