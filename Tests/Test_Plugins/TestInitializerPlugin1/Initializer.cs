@@ -1,7 +1,7 @@
 ﻿using Dosh.Core.Provider.Initializer;
 using System;
 
-namespace TestInitializerPlugin2
+namespace TestInitializerPlugin1
 {
     /// <summary>
     /// TestInitializerPlugin1
@@ -13,7 +13,7 @@ namespace TestInitializerPlugin2
         /// </summary>
         public void Initialize()
         {
-            Console.WriteLine("TestInitializerPlugin2 Called.");
+            Console.WriteLine("TestInitializerPlugin1 Called.");
         }
     }
 }

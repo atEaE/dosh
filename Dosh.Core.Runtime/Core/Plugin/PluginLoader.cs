@@ -1,4 +1,7 @@
-﻿using Dosh.Core.Provider.Initializer;
+﻿using Dosh.Core.Provider.Crawler;
+using Dosh.Core.Provider.Evaluator;
+using Dosh.Core.Provider.Injector;
+using Dosh.Core.Provider.Initializer;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -20,6 +23,36 @@ namespace Dosh.Core.Plugin
         public static IDictionary<string, IInitializer> LoadInitializerPlugins(string directoryPath)
         {
             return LoadPlugins<IInitializer>(directoryPath); 
+        }
+
+        /// <summary>
+        /// Load the Crawler plugins.
+        /// </summary>
+        /// <param name="directoryPath">dll folderpath</param>
+        /// <returns><see cref="ICrawler"/> plugins</returns>
+        public static IDictionary<string, ICrawler> LoadCrawlerPlugins(string directoryPath)
+        {
+            return LoadPlugins<ICrawler>(directoryPath);
+        }
+
+        /// <summary>
+        /// Load the Injector plugins.
+        /// </summary>
+        /// <param name="directoryPath">dll folderpath</param>
+        /// <returns><see cref="IInjector"/> plugins</returns>
+        public static IDictionary<string, IInjector> LoadInjectorPlugins(string directoryPath)
+        {
+            return LoadPlugins<IInjector>(directoryPath);
+        }
+
+        /// <summary>
+        /// Load the Evaluator plugins.
+        /// </summary>
+        /// <param name="directoryPath">dll folderpath</param>
+        /// <returns><see cref="IEvaluator"/> plugins</returns>
+        public static IDictionary<string, IEvaluator> LoadEvaluatorPlugins(string directoryPath)
+        {
+            return LoadPlugins<IEvaluator>(directoryPath);
         }
 
         /// <summary>
