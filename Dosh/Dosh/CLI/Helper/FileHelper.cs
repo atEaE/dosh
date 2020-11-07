@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.IO;
 using static Dosh.CLI.Const.CLIConst;
 
@@ -10,9 +9,10 @@ namespace Dosh.CLI.Helper
     /// </summary>
     public class FileHelper
     {
-        private const string CURRENT_ROOT_DOT = ".";
-
-        private const string DEFAULT_TESTFILENAME = ".dosh.yml";
+        /// <summary>
+        /// Default testfile name.
+        /// </summary>
+        public const string DEFAULT_TESTFILENAME = ".dosh.yml";
 
         /// <summary>
         /// Dosh application folder.(C:\Users\UserLocal\AppData\Roaming\Dosh)
@@ -33,6 +33,26 @@ namespace Dosh.CLI.Helper
         /// Dosh application temporary folder.
         /// </summary>
         public readonly static string DOSH_TEMPORARY_DIRECTORY = Path.Combine(DOSH_APP_DIRECTORY, "Temp");
+
+        /// <summary>
+        /// Dosh application plugin folder.
+        /// </summary>
+        public readonly static string DOSH_PLUGIN_DIRECTORY = Path.Combine(DOSH_APP_DIRECTORY, "Plugin");
+
+        /// <summary>
+        /// Dosh application Initializer plugin folder.
+        /// </summary>
+        public readonly static string DOSH_INITIALIZER_PLUGIN_DIRECTORY = Path.Combine(DOSH_PLUGIN_DIRECTORY, "Initializer");
+
+        /// <summary>
+        /// Dosh application Injector plugin folder.
+        /// </summary>
+        public readonly static string DOSH_INJECTOR_PLUGIN_DIRECTORY = Path.Combine(DOSH_PLUGIN_DIRECTORY, "Injector");
+
+        /// <summary>
+        /// Dosh application Crawler plugin folder.
+        /// </summary>
+        public readonly static string DOSH_CRAWLER_PLUGIN_DIRECTORY = Path.Combine(DOSH_PLUGIN_DIRECTORY, "Crawler");
 
         /// <summary>
         /// Test directory for workspace
@@ -56,7 +76,7 @@ namespace Dosh.CLI.Helper
         /// <returns>Completed path</returns>
         public static string GetCompletedPath(string path)
         {
-            if (CURRENT_ROOT_DOT == path)
+            if ("." == path)
             {
                 return DEFAULT_TESTFILENAME;
             }

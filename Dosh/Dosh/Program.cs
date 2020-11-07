@@ -1,6 +1,7 @@
 ﻿using CommandLine;
 using Dosh.CLI.Commands;
 using System.Configuration;
+using System.Threading.Tasks;
 using System.IO;
 using static Dosh.CLI.Helper.FileHelper;
 
@@ -39,6 +40,10 @@ namespace Dosh.CLI
             Directory.CreateDirectory(DOSH_LOG_DIRECTORY);
             Directory.CreateDirectory(DOSH_REPORT_DIRECTORY);
             Directory.CreateDirectory(DOSH_TEMPORARY_DIRECTORY);
+            Directory.CreateDirectory(DOSH_PLUGIN_DIRECTORY);
+            Parallel.Invoke(() => { Directory.CreateDirectory(DOSH_INITIALIZER_PLUGIN_DIRECTORY); }, 
+                            () => { Directory.CreateDirectory(DOSH_INJECTOR_PLUGIN_DIRECTORY); }, 
+                            () => { Directory.CreateDirectory(DOSH_CRAWLER_PLUGIN_DIRECTORY); });
         }
 
         /// <summary>
@@ -48,6 +53,7 @@ namespace Dosh.CLI
         {
             var conf = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             conf.AppSettings.Settings["appLogFile"].Value = Path.Combine(DOSH_LOG_DIRECTORY, "dosh-.log");
+            
             conf.Save(ConfigurationSaveMode.Modified);
             ConfigurationManager.RefreshSection("appSettings");
         }
