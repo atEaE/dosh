@@ -50,10 +50,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CLI\Helper\Test_FileHelper.cs" />
+    <Compile Include="CLI\Helper\Test_AppConfigUtil.cs" />
     <Compile Include="CLI\Sentence\Test_LocalizableSentenceBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

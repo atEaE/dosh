@@ -1,5 +1,6 @@
 ﻿using CommandLine;
 using Dosh.CLI.Exception;
+using Dosh.CLI.Helper;
 using Dosh.Core.DoshFile;
 using Dosh.Core.Parser;
 using Dosh.Core.SementicsAnalyzer;
@@ -55,7 +56,9 @@ namespace Dosh.CLI.Commands
             }
 
             scaffoldTestCases(doshConfig);
-            var semanticsAnalyzer = new DoshFileSemanticsAnalyzer(initPluginPath: "");
+            var semanticsAnalyzer = new DoshFileSemanticsAnalyzer(initializerPluginPath: AppConfigUtil.InitializerPluginPath,
+                                                                  injectorPluginPath: AppConfigUtil.InjectorPluginPath,
+                                                                  crawlerPluginPath: AppConfigUtil.CrawlerPluginPath);
             var exes = semanticsAnalyzer.Analyze(doshConfig);
             exes.ForEach(e =>
             {

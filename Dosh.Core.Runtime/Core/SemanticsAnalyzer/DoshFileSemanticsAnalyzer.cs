@@ -9,11 +9,32 @@ namespace Dosh.Core.SementicsAnalyzer
 {
     public class DoshFileSemanticsAnalyzer : ISemanticsAnalyzer
     {
-        private string initPluginPath;
+        /// <summary>
+        /// Initializer plugin path.
+        /// </summary>
+        private string initializerPluginPath;
 
-        public DoshFileSemanticsAnalyzer(string initPluginPath)
+        /// <summary>
+        /// Injector plugin path.
+        /// </summary>
+        private string injectorPluginPath;
+
+        /// <summary>
+        /// Crawler plugin path.
+        /// </summary>
+        private string crawlerPluginPath;
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="initializerPluginPath">Initializer plugin path.</param>
+        /// <param name="injectorPluginPath">Injector plugin path.</param>
+        /// <param name="crawlerPluginPath">Crawler plugin path.</param>
+        public DoshFileSemanticsAnalyzer(string initializerPluginPath, string injectorPluginPath, string crawlerPluginPath)
         {
-            this.initPluginPath = initPluginPath;
+            this.initializerPluginPath = initializerPluginPath;
+            this.injectorPluginPath = injectorPluginPath;
+            this.crawlerPluginPath = crawlerPluginPath;
         }
 
         public List<ITestExec> Analyze(DoshFileModel doshFile)
@@ -33,7 +54,7 @@ namespace Dosh.Core.SementicsAnalyzer
 
         private IEnumerable<IInitializer> analyzeSetup(IEnumerable<SetupConfig> setups)
         {
-            var initlisers = Plugin.PluginLoader.LoadInitializerPlugins(initPluginPath);
+            var initlisers = Plugin.PluginLoader.LoadInitializerPlugins(initializerPluginPath);
             foreach(var setup in setups)
             {
                 if (initlisers.ContainsKey(setup.Type))

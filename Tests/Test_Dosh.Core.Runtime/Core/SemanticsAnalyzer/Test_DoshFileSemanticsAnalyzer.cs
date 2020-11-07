@@ -21,7 +21,7 @@ namespace Test_Dosh.Core.Runtime.SemanticsAnalyzer
             var result = parser.Parse(input);
 
             // semantics
-            var analyzer = new DoshFileSemanticsAnalyzer("");
+            var analyzer = new DoshFileSemanticsAnalyzer(initializerPluginPath: "", injectorPluginPath: "", crawlerPluginPath: "");
             var exes = analyzer.Analyze(result);
             Assert.IsNotNull(exes);
 
