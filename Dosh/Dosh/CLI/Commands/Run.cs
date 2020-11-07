@@ -27,22 +27,21 @@ namespace Dosh.CLI.Commands
         /// </summary>
         protected override void OnExecute()
         {
-            if (!File.Exists(TestFilePath))
+            var completedPath = GetCompletedPath(TestFilePath);
+            if (!File.Exists(completedPath))
             {
                 Console.WriteLine(CLI_00104);
                 return;
             }
 
-            var input = string.Empty;       
-            using (var sr = new StreamReader(TestFilePath))
-            {
-                input = sr.ReadToEnd();
-            }
-
-            DoshFileModel result;
+            DoshFileModel doshConfig;
             try
             {
-                result = new DoshParser().Parse(input);
+                using (var sr = new StreamReader(completedPath))
+                {
+                    var input = sr.ReadToEnd();
+                    doshConfig = new DoshParser().Parse(input);
+                }
             }
             catch(System.Exception ex)
             {
@@ -50,13 +49,14 @@ namespace Dosh.CLI.Commands
                 return;
             }
 
-            if (!ensureTestExecute(result))
+            if (!ensureTestExecute(doshConfig))
             {
                 return;
             }
 
-            scaffoldTestCases(result);
-            var exes = new DoshFileSemanticsAnalyzer().Analyze(result);
+            scaffoldTestCases(doshConfig);
+            var semanticsAnalyzer = new DoshFileSemanticsAnalyzer(initPluginPath: "");
+            var exes = semanticsAnalyzer.Analyze(doshConfig);
             exes.ForEach(e =>
             {
                 e.Execute();

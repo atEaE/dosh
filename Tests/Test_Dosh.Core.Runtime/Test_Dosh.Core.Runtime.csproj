@@ -51,7 +51,7 @@
   <ItemGroup>
     <Compile Include="Core\Parser\Test_DoshParser.cs" />
     <Compile Include="Core\SemanticsAnalyzer\Test_DoshFileSemanticsAnalyzer.cs" />
-    <Compile Include="Plugin\Test_PluginLoader.cs" />
+    <Compile Include="Core\Plugin\Test_PluginLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

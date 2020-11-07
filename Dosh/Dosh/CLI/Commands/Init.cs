@@ -8,7 +8,7 @@ namespace Dosh.CLI.Commands
     /// <summary>
     /// Initialize command
     /// </summary>
-    [Verb("init")]
+    [Verb(name: "init", HelpText = "Dosh initialization. Generate a test folder in the current directory.")]
     public class Init : CommandBase
     {
         /// <summary>
@@ -25,8 +25,8 @@ namespace Dosh.CLI.Commands
 
             try
             {
-                Console.WriteLine("Initialize dosh.");
                 var testDir = Directory.CreateDirectory(testDirPath);
+                Console.WriteLine("Initialize dosh.");
             }
             catch(IOException ioEx)
             {

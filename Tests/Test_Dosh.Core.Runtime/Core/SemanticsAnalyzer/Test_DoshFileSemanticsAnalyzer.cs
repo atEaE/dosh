@@ -3,7 +3,7 @@ using Dosh.Core.SementicsAnalyzer;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 
-namespace Test_Dosh.Core.Runtime.Core.SemanticsAnalyzer
+namespace Test_Dosh.Core.Runtime.SemanticsAnalyzer
 {
     [TestClass]
     public class Test_DoshFileSemanticsAnalyzer
@@ -21,7 +21,7 @@ namespace Test_Dosh.Core.Runtime.Core.SemanticsAnalyzer
             var result = parser.Parse(input);
 
             // semantics
-            var analyzer = new DoshFileSemanticsAnalyzer();
+            var analyzer = new DoshFileSemanticsAnalyzer("");
             var exes = analyzer.Analyze(result);
             Assert.IsNotNull(exes);
 

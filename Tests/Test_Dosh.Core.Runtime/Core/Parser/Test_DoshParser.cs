@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.IO;
 
-namespace Test_Dosh.Core.Runtime.Core.Parser
+namespace Test_Dosh.Core.Runtime.Parser
 {
     [TestClass]
     public class Test_DoshParser

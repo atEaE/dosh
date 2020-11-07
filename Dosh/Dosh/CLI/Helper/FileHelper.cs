@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.IO;
 using static Dosh.CLI.Const.CLIConst;
 
@@ -9,6 +10,10 @@ namespace Dosh.CLI.Helper
     /// </summary>
     public class FileHelper
     {
+        private const string CURRENT_ROOT_DOT = ".";
+
+        private const string DEFAULT_TESTFILENAME = ".dosh.yml";
+
         /// <summary>
         /// Dosh application folder.(C:\Users\UserLocal\AppData\Roaming\Dosh)
         /// </summary>
@@ -42,6 +47,29 @@ namespace Dosh.CLI.Helper
         public static string GetTestIdDirectory(string id)
         {
             return Path.Combine(DOSH_WORKSPACE_TEST_DIRECTORY, id);
+        }
+
+        /// <summary>
+        /// Completes the path passed to the argument and returns it.
+        /// </summary>
+        /// <param name="path">path</param>
+        /// <returns>Completed path</returns>
+        public static string GetCompletedPath(string path)
+        {
+            if (CURRENT_ROOT_DOT == path)
+            {
+                return DEFAULT_TESTFILENAME;
+            }
+
+            var fileExt = Path.GetExtension(path);
+            if (string.IsNullOrEmpty(fileExt))
+            {
+                return Path.Combine(path, DEFAULT_TESTFILENAME);
+            }
+            else
+            {
+                return path;
+            }
         }
     }
 }

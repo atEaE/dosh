@@ -9,6 +9,9 @@ namespace Dosh.Core.DoshFile
     [DataContract]
     public class SetupConfig : IRefsAllowsModel
     {
+        /// <summary>
+        /// initializer type (Set the dll name.)
+        /// </summary>
         [YamlMember(Alias = "type")]
         public string Type { get; set; }
 
