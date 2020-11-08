@@ -131,5 +131,59 @@ namespace Dosh.Properties {
                 return ResourceManager.GetString("CLI_00008", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   An unexpected error has occurred. {0} に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string CLI_00100 {
+            get {
+                return ResourceManager.GetString("CLI_00100", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Permission denied. {0} に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string CLI_00101 {
+            get {
+                return ResourceManager.GetString("CLI_00101", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   &apos;{0}&apos; directory creation failed. {1} に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string CLI_00102 {
+            get {
+                return ResourceManager.GetString("CLI_00102", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Test identification directory does not exist. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string CLI_00103 {
+            get {
+                return ResourceManager.GetString("CLI_00103", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   .dosh.yml file does not exist. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string CLI_00104 {
+            get {
+                return ResourceManager.GetString("CLI_00104", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Failed to parse the .dosh.yml file. {0} に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string CLI_00105 {
+            get {
+                return ResourceManager.GetString("CLI_00105", resourceCulture);
+            }
+        }
     }
 }

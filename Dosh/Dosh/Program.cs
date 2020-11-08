@@ -1,8 +1,10 @@
 ﻿using CommandLine;
 using Dosh.CLI.Commands;
+using Dosh.CLI.Helper;
 using System.Configuration;
 using System.IO;
-using static Dosh.CLI.Const.CLIConst;
+using System.Threading.Tasks;
+using static Dosh.CLI.Helper.FileHelper;
 
 namespace Dosh.CLI
 {
@@ -17,7 +19,7 @@ namespace Dosh.CLI
         /// <param name="args">command line arguments</param>
         public static void Main(string[] args)
         {
-            if (!Directory.Exists(DOSH_APPFOLDER))
+            if (!Directory.Exists(DOSH_APP_DIRECTORY))
             {
                 createApplicationFolder();
             }
@@ -35,10 +37,14 @@ namespace Dosh.CLI
         /// </summary>
         private static void createApplicationFolder()
         {
-            Directory.CreateDirectory(DOSH_APPFOLDER);
-            Directory.CreateDirectory(DOSH_LOGFOLDER);
-            Directory.CreateDirectory(DOSH_REPORT);
-            Directory.CreateDirectory(DOSH_TEMPORARY);
+            Directory.CreateDirectory(DOSH_APP_DIRECTORY);
+            Directory.CreateDirectory(DOSH_LOG_DIRECTORY);
+            Directory.CreateDirectory(DOSH_REPORT_DIRECTORY);
+            Directory.CreateDirectory(DOSH_TEMPORARY_DIRECTORY);
+            Directory.CreateDirectory(DOSH_PLUGIN_DIRECTORY);
+            Parallel.Invoke(() => { Directory.CreateDirectory(DOSH_INITIALIZER_PLUGIN_DIRECTORY); }, 
+                            () => { Directory.CreateDirectory(DOSH_INJECTOR_PLUGIN_DIRECTORY); }, 
+                            () => { Directory.CreateDirectory(DOSH_CRAWLER_PLUGIN_DIRECTORY); });
         }
 
         /// <summary>
@@ -47,7 +53,10 @@ namespace Dosh.CLI
         private static void initializeAppConfig()
         {
             var conf = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            conf.AppSettings.Settings["appLogFile"].Value = Path.Combine(DOSH_LOGFOLDER, "dosh-.log");
+            conf.AppSettings.Settings["appLogFile"].Value = Path.Combine(DOSH_LOG_DIRECTORY, "dosh-.log");
+            AppConfigUtil.SetInitializerPluginPath(conf, DOSH_INITIALIZER_PLUGIN_DIRECTORY);
+            AppConfigUtil.SetInjectorPluginPath(conf, DOSH_INJECTOR_PLUGIN_DIRECTORY);
+            AppConfigUtil.SetCrawlerPluginPath(conf, DOSH_CRAWLER_PLUGIN_DIRECTORY);
             conf.Save(ConfigurationSaveMode.Modified);
             ConfigurationManager.RefreshSection("appSettings");
         }

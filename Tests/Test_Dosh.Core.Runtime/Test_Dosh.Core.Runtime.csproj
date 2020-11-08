@@ -49,13 +49,60 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Parser\Test_DoshParser.cs" />
+    <Compile Include="Core\SemanticsAnalyzer\Test_DoshFileSemanticsAnalyzer.cs" />
+    <Compile Include="Core\Plugin\Test_PluginLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Tests\Doshfile\test_normal_refs.yml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Tests\Doshfile\test_normal.yml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\Dosh.Core.Provider\Dosh.Core.Provider.csproj">
+      <Project>{ed33c5df-4fa3-4076-bb41-3e103a1f3c7c}</Project>
+      <Name>Dosh.Core.Provider</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Dosh.Core.Runtime\Dosh.Core.Runtime.csproj">
+      <Project>{ccb2d966-0e95-43ed-821e-70c8ed2f07bb}</Project>
+      <Name>Dosh.Core.Runtime</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TestUtil\TestUtil.csproj">
+      <Project>{3ed2cd56-43ed-4c41-bd38-e9bb28c4b107}</Project>
+      <Name>TestUtil</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Core\" />
+    <Content Include="Tests\Plugin\Crawler\TestCrawlerPlugin1.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Tests\Plugin\Crawler\TestCrawlerPlugin2.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Tests\Plugin\Evaluator\TestEvaluatorPlugin1.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Tests\Plugin\Evaluator\TestEvaluatorPlugin2.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Tests\Plugin\Initializer\TestInitializerPlugin1.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Tests\Plugin\Initializer\TestInitializerPlugin2.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Tests\Plugin\Injector\TestInjectorPlugin1.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Tests\Plugin\Injector\TestInjectorPlugin2.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

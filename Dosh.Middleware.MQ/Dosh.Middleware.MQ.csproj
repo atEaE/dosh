@@ -7,7 +7,7 @@
     <ProjectGuid>{97E51251-3263-4F14-A7C0-797A137BAD53}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Dosh.Middleware.MQ</RootNamespace>
+    <RootNamespace>Dosh</RootNamespace>
     <AssemblyName>Dosh.Middleware.MQ</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -45,11 +45,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Middleware\MQ\IBM\IBMMQQueue.cs" />
+    <Compile Include="Middleware\MQ\IBM\IIBMMQQueue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Middleware\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="amqmdnet.dll" />
   </ItemGroup>
