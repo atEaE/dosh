@@ -1,8 +1,9 @@
 ﻿using CommandLine;
 using Dosh.CLI.Commands;
+using Dosh.CLI.Helper;
 using System.Configuration;
-using System.Threading.Tasks;
 using System.IO;
+using System.Threading.Tasks;
 using static Dosh.CLI.Helper.FileHelper;
 
 namespace Dosh.CLI
@@ -53,7 +54,9 @@ namespace Dosh.CLI
         {
             var conf = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             conf.AppSettings.Settings["appLogFile"].Value = Path.Combine(DOSH_LOG_DIRECTORY, "dosh-.log");
-            
+            AppConfigUtil.SetInitializerPluginPath(conf, DOSH_INITIALIZER_PLUGIN_DIRECTORY);
+            AppConfigUtil.SetInjectorPluginPath(conf, DOSH_INJECTOR_PLUGIN_DIRECTORY);
+            AppConfigUtil.SetCrawlerPluginPath(conf, DOSH_CRAWLER_PLUGIN_DIRECTORY);
             conf.Save(ConfigurationSaveMode.Modified);
             ConfigurationManager.RefreshSection("appSettings");
         }
